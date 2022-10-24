@@ -10,6 +10,7 @@ from selenium.common import TimeoutException, WebDriverException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.core import driver
 
 from wrapper.elementfinder import ElementByLocator
 from utilities.customLogger import LogGen
@@ -30,9 +31,9 @@ class BasePage:
         self.timeout = 60
         self.implicitly_wait = 20
 
-    def click_element(self, locator, timeout=3):
+    def click_element(self, locator, timeout=10):
         return WebDriverWait(self.driver, timeout).until(
-            EC.presence_of_element_located(self.element_by_finder.by_locator(locator))).click()
+            EC.element_to_be_clickable(self.element_by_finder.by_locator(locator))).click()
 
     def click_element_by_js(self, locator, timeout=10):
         element = WebDriverWait(self.driver, timeout).until(
@@ -59,6 +60,7 @@ class BasePage:
         this method scrolls into view of associated element located by the locator
         :param locator: Locator which is implemented to identify the element to scroll into view
         """
+        self.wait_element_presence(locator)
         location = self.driver.find_element(By.XPATH, locator).location
         self.driver.execute_script("window.scrollTo({}, {});".format(location['x'], location['y']))
 
@@ -113,7 +115,7 @@ class BasePage:
 
     def verify_user_redirect_to_correct_location(self, url):
         self.logger.info("Verify user redirect to correct location")
-        time.sleep(5)
+        time.sleep(20)
         txt_link = self.get_location()
         self.assert_two_values_equal(txt_link, url, 'yes')
 
@@ -155,29 +157,65 @@ class BasePage:
         self.logger.info("Validation {} Property Passed: Actual: {} and Expected: {}".format(property, actual_value, expected_value))
 
     def verify_image_is_not_broken(self, locator):
+        self.wait_element_presence(locator)
         self.scroll_into_locator(locator)
+        time.sleep(2)
         image = self.driver.find_element(By.XPATH, locator)
         response = requests.get(image.get_attribute('src'), stream=True)
         response_code = response.status_code
         assert response_code == 200
         self.logger.info("{} image is not broken".format(locator))
 
-    def verify_images_are_not_broken(self):
-        image_list = self.driver.find_elements(By.XPATH, "//a[text()='Courses for individuals']//parent::div//img")
-        response_code_list = []
-        for image in image_list:
-            response = requests.get(image.get_attribute('src'), stream=True)
-            response_code = response.status_code
-            response_code_list = response_code_list.append(response_code)
-        assert "404" not in response_code_list
+    def verify_images_are_not_broken(self, locator):
+        try:
+           image_list = self.driver.find_elements(By.XPATH, locator)
+           response_code_list = []
+           for image in image_list:
+               time.sleep(2)
+               response = requests.get(image.get_attribute('src'), stream=True)
+               response_code = response.status_code
+               response_code_list.append(response_code)
+               # print (response_code_list)
+               if response_code == 404:
+                   self.logger.info(image.get_attribute('src') + " is broken")
+               else:
+                   self.logger.info(image.get_attribute('src') + " is not broken")
+           assert 404 not in response_code_list
+        except requests.exceptions.MissingSchema:
+           print("Encountered MissingSchema Exception")
+        except requests.exceptions.InvalidSchema:
+            print("Encountered InvalidSchema Exception")
 
-    def verify_image_is_not_broken2(self):
-        self.scroll_into_locator("//h3//following-sibling::img[1]")
-        image = self.driver.find_element(By.XPATH, "//h3//following-sibling::img[1]")
-        response = requests.get(image.get_attribute('src'), stream=True)
-        response_code = response.status_code
-        assert response_code == 200
-        self.logger.info("{} image is not broken".format("//h3//following-sibling::img[1]"))
+    def verify_image_is_not_broken_in_failed_case(self):
+        try:
+            image_list = self.driver.find_elements(By.XPATH, "//img")
+            response_code_list = []
+            for image in image_list:
+                time.sleep(2)
+                response = requests.get(image.get_attribute('src'), stream=True)
+                response_code = response.status_code
+                response_code_list.append(response_code)
+                print(response_code_list)
+                if response_code == 404:
+                    self.logger.info(image.get_attribute('src') + " is broken")
+                else:
+                    self.logger.info(image.get_attribute('src') + " is not broken")
+            assert 404 not in response_code_list
+        except requests.exceptions.MissingSchema:
+            print("Encountered MissingSchema Exception")
+        except requests.exceptions.InvalidSchema:
+            print("Encountered InvalidSchema Exception")
 
+    def wait_element_presence(self, locator):
+        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, locator)))
+        return self
+
+    def switch_to_iframe(self, locator, timeout=10):
+        iframe = self.driver.find_element(By.XPATH, locator)
+        WebDriverWait(self.driver, 10).until(
+            EC.frame_to_be_available_and_switch_to_it((By.XPATH, locator)))
+    def tab_out(self, locator):
+        self.wait_element_presence(locator)
+        return self.driver.find_element(By.XPATH,locator).send_keys("\t")
 
 
