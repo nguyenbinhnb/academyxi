@@ -1,12 +1,8 @@
-import time
-from telnetlib import EC
 
-from selenium.common import TimeoutException, WebDriverException
+from telnetlib import EC
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
-from utilities.customLogger import LogGen
 from wrapper.BasePage import BasePage
 from wrapper.elementfinder import ElementByLocator
 

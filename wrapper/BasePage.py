@@ -1,6 +1,7 @@
 import os
 import time
 from telnetlib import EC
+import re
 
 import outcome
 import pytest_html
@@ -150,9 +151,12 @@ class BasePage:
         return actual_text == expected_text
 
     def verify_css_property(self, locator, property, expected_value):
+        self.wait_for_page_load()
         self.scroll_into_locator(locator)
-        actual_value = self.driver.find_element(By.XPATH, locator).value_of_css_property(property);
+        actual_value = self.driver.find_element(By.XPATH, locator).value_of_css_property(property)
         print(actual_value)
+        # actual_value = self.driver.rgb_to_hex(rgba_value)
+        # print(actual_value)
         assert actual_value == expected_value
         self.logger.info("Validation {} Property Passed: Actual: {} and Expected: {}".format(property, actual_value, expected_value))
 
@@ -207,15 +211,61 @@ class BasePage:
             print("Encountered InvalidSchema Exception")
 
     def wait_element_presence(self, locator):
-        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, locator)))
+        WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable((By.XPATH, locator)))
         return self
 
     def switch_to_iframe(self, locator, timeout=10):
         iframe = self.driver.find_element(By.XPATH, locator)
         WebDriverWait(self.driver, 10).until(
             EC.frame_to_be_available_and_switch_to_it((By.XPATH, locator)))
-    def tab_out(self, locator):
-        self.wait_element_presence(locator)
-        return self.driver.find_element(By.XPATH,locator).send_keys("\t")
+
+    def is_present(self, locator):
+        self.wait_for_page_load()
+        self.scroll_into_locator(locator)
+        element = self.driver.find_elements(By.XPATH, locator)
+        if len(element):
+            self.logger.info("Element {} is present.".format(locator))
+            return True
+        else:
+            print("element is not present")
+            self.logger.info("Element {} is not present.".format(locator))
+            return False
+
+    def wait_for_page_load(self, timeout=30):
+        try:
+            old_page = self.driver.find_element(By.XPATH, '//html')
+            yield
+            WebDriverWait(self, timeout).until(
+                EC.staleness_of(old_page)
+            )
+        except TimeoutException:
+            self.logger.info("got timeout exception on wait for page load!!")
+
+    def verify_working_link(self, locator):
+        try:
+            working_link_list = self.driver.find_elements(By.XPATH, locator)
+            response_code_list = []
+            for link in working_link_list:
+                time.sleep(2)
+                response = requests.get(link.get_attribute('href'), stream=True)
+                print(response)
+                response_code = response.status_code
+                response_code_list.append(response_code)
+                print (response_code_list)
+                if response_code == 200:
+                    self.logger.info(link.get_attribute('href') + " is present")
+                else:
+                    self.logger.info(link.get_attribute('href') + " is not broken")
+            assert 404 not in response_code_list
+        except requests.exceptions.MissingSchema:
+            print("Encountered MissingSchema Exception")
+        except requests.exceptions.InvalidSchema:
+            print("Encountered InvalidSchema Exception")
+    def scroll_down_to_bottom(self):
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+    def scroll_down_to_top(self):
+        self.driver.execute_script("window.scrollTo(0, -(document.body.scrollHeight));")
+
 
 
