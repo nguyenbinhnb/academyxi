@@ -1,5 +1,3 @@
-import time
-
 import pytest
 
 from pageObjects.HomePage import HomePage
@@ -17,12 +15,13 @@ class Test_001_Demo:
 
     @pytest.mark.sanity
     @pytest.mark.regression
-    @pytest.mark.smoke
+    # @pytest.mark.smoke
     def test_001_download_course_guide(self):
         self.logger.info("Test_001_main_flow")
         self.logger.info("Started Go To Home page")
         self.driver.get(self.baseURL)
         self.basePage = BasePage(self.driver)
+        self.basePage.wait_for_page_load()
         self.basePage.verify_text_element_should_be_displayed('a','Discover your  learning path')
         self.basePage.verify_text_element_should_be_displayed('a', 'Upskill your organisation')
         self.homePage = HomePage(self.driver)
@@ -30,6 +29,7 @@ class Test_001_Demo:
         self.basePage.verify_text_element_should_be_displayed('span', 'Academy Xi’s expert-led courses and workshops are designed to help you learn, practice and embed new knowledge, preparing you to shape your career and change the world.')
         self.basePage.verify_course_item_should_be_displayed('Data Analytics Pro')
         self.homePage.click_page_number('2')
+        self.basePage.wait_for_page_load()
         self.homePage.download_course_guide('aXi Tes', 'Sanest', '355664455', 'testing@gmail.com','React', 'Change or start a new career')
         self.thankYouPage = ThankYouPage(self.driver)
         self.basePage.verify_user_redirect_to_correct_location('https://academyxi.com/online-courses/software-engineering/course-guide/thank-you/')

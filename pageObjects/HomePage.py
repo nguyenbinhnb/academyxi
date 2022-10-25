@@ -16,7 +16,7 @@ class HomePage(BasePage):
     enroll_first_course_css_selector = "a[data-discipline*='Data Analytics Pro']"
     close_chat_box_button_css_selector = "//button[@aria-label='Minimize window']"
     download_iframe= "//iframe[contains(@src, 'is_show_course_price=1')]"
-    page_number_xpath = "//a[text()='{}']"
+    a_with_text = "//a[text()='{}']"
     enroll_course_xpath = "//div[@data-name-courses='{}']/div[@class='right-content']//a[text()='Enrol now']"
     download_course_guide_xpath = "//div[@data-name-courses='Customer Experience']/div[@class='right-content']//a[text()='Download course guide']"
     firstname_xpath = "//input[@placeholder='First Name *']"
@@ -49,7 +49,7 @@ class HomePage(BasePage):
         self.driver.execute_script("arguments[0].click();", element)
 
     def click_page_number(self, num):
-        self.click_element(self.page_number_xpath.format(num))
+        self.click_element(self.a_with_text.format(num))
 
     def enroll_a_specific_course(self, name):
         self.driver.execute_script("window.scrollTo(0, -(document.body.scrollHeight));")
@@ -58,7 +58,6 @@ class HomePage(BasePage):
         self.click_element_by_js(self.enroll_course_xpath.format(name))
 
     def download_course_guide(self, firstname, lastname, phone, email, discipline, reason):
-        time.sleep(5)
         self.scroll_into_locator("//a[text()='3']")
         self.switch_to_iframe(self.download_iframe)
         self.input_text(self.firstname_xpath, firstname)
@@ -110,6 +109,28 @@ class HomePage(BasePage):
         self.verify_images_are_not_broken("//img[contains(@src,'high-five.svg')]")
         self.verify_images_are_not_broken("//img[contains(@data-src,'banner-logo.png')]")
         self.verify_images_are_not_broken("//a[@aria-label='Flag']//img")
+
+    def verify_presence_of_ctas_on_home_page(self):
+        self.is_present(self.enroll_a_course_button_xpath)
+        self.is_present(self.a_with_text.format("Courses for individuals"))
+        self.is_present(self.a_with_text.format("Training for teams"))
+        self.is_present(self.a_with_text.format("Talent & recruitment "))
+
+    def verify_color_of_ctas_on_home_page(self):
+        time.sleep(3)
+        self.verify_css_property(self.enroll_a_course_button_xpath, "background-color", "rgba(0, 0, 0, 0)")
+        self.verify_css_property(self.enroll_a_course_button_xpath, "color", "rgba(255, 255, 255, 1)")
+        self.verify_css_property(self.a_with_text.format("Courses for individuals"), "background-color", "rgba(0, 0, 0, 0)")
+        self.verify_css_property(self.a_with_text.format("Courses for individuals"), "color", "rgba(18, 30, 77, 1)")
+        self.verify_css_property(self.a_with_text.format("Training for teams"), "background-color", "rgba(0, 0, 0, 0)")
+        self.verify_css_property(self.a_with_text.format("Training for teams"), "color", "rgba(18, 30, 77, 1)")
+        self.verify_css_property(self.a_with_text.format("Talent & recruitment "), "background-color", "rgba(0, 0, 0, 0)")
+        self.verify_css_property(self.a_with_text.format("Talent & recruitment "), "color", "rgba(18, 30, 77, 1)")
+    def verify_working_link_of_ctas_on_home_page(self):
+        self.verify_working_link("//a[@href = 'https://academyxi.com/buy-now/']")
+        self.verify_working_link(self.a_with_text.format("Courses for individuals"))
+        self.verify_working_link(self.a_with_text.format("Training for teams"))
+        self.verify_working_link(self.a_with_text.format("Courses for individuals"))
 
 
 
