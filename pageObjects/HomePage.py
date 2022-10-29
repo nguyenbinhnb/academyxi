@@ -1,13 +1,12 @@
 import time
 from telnetlib import EC
 
-from selenium.webdriver import Keys
+from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from wrapper.BasePage import BasePage
 from wrapper.elementfinder import ElementByLocator
-from selenium.webdriver.remote.webelement import WebElement
 
 
 class HomePage(BasePage):
@@ -24,7 +23,7 @@ class HomePage(BasePage):
     phone_number_id = "number-phone"
     email_xpath = "//p[contains(@class, 'form_phone')]//following-sibling::p//input[@placeholder='Email *']"
     i_am_over_18_xpath = "//label[text()='I am over 18']//preceding-sibling::input"
-    download_button_xpath = "//input[@value='Download']"
+    download_button_xpath = "//input[@value='Download course guide']"
     software_engineer_transform_course_xpath ="//img[contains(@srcset, 'https://academyxi.com/wp-content/uploads/2020/12/Screen-Shot-2020-12-23-at-2.23.54-pm-338x480.png')]"
     courses_for_individual = "//a[text()='{}']//parent::div//img"
     images_in_for_individuals_tab = "//img[@alt='{}']"
@@ -49,7 +48,8 @@ class HomePage(BasePage):
         self.driver.execute_script("arguments[0].click();", element)
 
     def click_page_number(self, num):
-        self.click_element(self.a_with_text.format(num))
+        self.wait_element_presence(self.a_with_text.format(num))
+        self.click_element_by_js(self.a_with_text.format(num))
 
     def enroll_a_specific_course(self, name):
         self.driver.execute_script("window.scrollTo(0, -(document.body.scrollHeight));")
@@ -59,6 +59,8 @@ class HomePage(BasePage):
 
     def download_course_guide(self, firstname, lastname, phone, email, discipline, reason):
         self.scroll_into_locator("//a[text()='3']")
+        self.wait_for_page_load()
+        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         self.switch_to_iframe(self.download_iframe)
         self.input_text(self.firstname_xpath, firstname)
         self.input_text(self.lastname_xpath, lastname)
@@ -68,47 +70,13 @@ class HomePage(BasePage):
         self.click_element(self.options_in_dropdown.format('Discipline', discipline))
         self.click_element(self.options_in_dropdown.format('Study_Motivation', reason))
         self.input_text(self.email_xpath, email)
-        self.scroll_into_locator(self.download_button_xpath)
         self.click_element_by_js(self.i_am_over_18_xpath)
+        self.wait_for_page_load()
         self.click_element_by_js(self.download_button_xpath)
         time.sleep(10)
 
     def verify_locator_css_value(self, property, expected_value):
         self.verify_css_property(self.software_engineer_transform_course_xpath, property, expected_value)
-
-    def verify_academyxi_logo(self):
-        self.verify_images_are_not_broken(self.academyxi_logo)
-        self.logger.info("Academyxi Logo is not broken")
-
-    def verify_images_are_not_broken_on_home_page(self):
-        self.verify_images_are_not_broken("//div[@class = 'image']//img")
-        self.scroll_into_locator(self.h2_with_text.format('Why choose Academy Xi? '))
-        self.logger.info("Verify images in For Individuals tab")
-        self.verify_images_are_not_broken("//div[@class = 'entry-image-box icon']//img")
-        self.scroll_into_locator(self.h2_with_text.format('Why choose Academy Xi? '))
-        self.click_element(self.span_with_text.format("For organisations"))
-        self.logger.info("Verify images in For Organisations tab")
-        time.sleep(3)
-        self.verify_images_are_not_broken("//div[@class = 'entry-image-box icon']//img")
-        self.scroll_into_locator(self.h2_with_text.format('Why choose Academy Xi? '))
-        self.click_element(self.span_with_text.format("For recruitment"))
-        self.logger.info("Verify images in For Recruitment tab")
-        time.sleep(3)
-        self.verify_images_are_not_broken("//div[@class = 'entry-image-box icon']//img")
-        self.logger.info("Verify images in Our clients & learning partners section")
-        self.scroll_into_locator(self.h2_with_text.format('Our clients & learning partners'))
-        self.verify_images_are_not_broken("//div[@class = 'entry-image-box']//img")
-        self.logger.info("Verify images in What’s happening inside Academy Xi section")
-        self.scroll_into_locator(self.h2_with_text.format('What’s happening inside Academy Xi'))
-        self.verify_images_are_not_broken("//div[@class = 'image']//img")
-        self.verify_images_are_not_broken("//div[@class = 'item']//img")
-        self.scroll_into_locator(self.h2_with_text.format('Academy Xi: Your digital partner!'))
-        self.logger.info("Verify images in Academy Xi: Your digital partner! section")
-        self.verify_images_are_not_broken("//div[@class = 'elementor-image']//img")
-        self.scroll_into_locator("//p[text()='Copyright 2022 © AcademyXi']")
-        self.verify_images_are_not_broken("//img[contains(@src,'high-five.svg')]")
-        self.verify_images_are_not_broken("//img[contains(@data-src,'banner-logo.png')]")
-        self.verify_images_are_not_broken("//a[@aria-label='Flag']//img")
 
     def verify_presence_of_ctas_on_home_page(self):
         self.is_present(self.enroll_a_course_button_xpath)
@@ -131,6 +99,10 @@ class HomePage(BasePage):
         self.verify_working_link(self.a_with_text.format("Courses for individuals"))
         self.verify_working_link(self.a_with_text.format("Training for teams"))
         self.verify_working_link(self.a_with_text.format("Courses for individuals"))
+
+
+
+
 
 
 
