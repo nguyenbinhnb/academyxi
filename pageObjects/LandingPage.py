@@ -22,3 +22,4 @@ class LandingPage(BasePage):
 
     def verify_working_link_of_ctas_on_landing_page(self):
         self.verify_working_link(self.download_course_guide_button)
+

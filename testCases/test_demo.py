@@ -8,7 +8,7 @@ from utilities.customLogger import LogGen
 
 @pytest.mark.usefixtures("setup")
 class Test_001_Demo:
-    baseURL = ReadConfig.getApplicationURL()
+    baseURL = ReadConfig.getApplicationURL("baseURL")
     username = ReadConfig.getUseremail()
     password = ReadConfig.getPassword()
     logger = LogGen.loggen()
