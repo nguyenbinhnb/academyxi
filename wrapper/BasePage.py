@@ -32,7 +32,6 @@ class BasePage:
         self.implicitly_wait = 20
 
     def click_element(self, locator, timeout=10):
-        self.scroll_into_locator(locator)
         return WebDriverWait(self.driver, timeout).until(
             EC.element_to_be_clickable(self.element_by_finder.by_locator(locator))).click()
 
@@ -101,6 +100,7 @@ class BasePage:
         return self
 
     def verify_text_element_should_be_displayed(self, tag, text):
+        self.wait_element_presence(self.tag_with_text_xpath.format(tag, text))
         self.element_should_be_visible(self.tag_with_text_xpath.format(tag, text), "Element is not present")
         return self
 
@@ -155,20 +155,8 @@ class BasePage:
         self.scroll_into_locator(locator)
         actual_value = self.driver.find_element(By.XPATH, locator).value_of_css_property(property)
         print(actual_value)
-        # actual_value = self.driver.rgb_to_hex(rgba_value)
-        # print(actual_value)
         assert actual_value == expected_value
         self.logger.info("Validation {} Property Passed: Actual: {} and Expected: {}".format(property, actual_value, expected_value))
-
-    def verify_image_is_not_broken(self, locator):
-        self.wait_element_presence(locator)
-        self.scroll_into_locator(locator)
-        time.sleep(2)
-        image = self.driver.find_element(By.XPATH, locator)
-        response = requests.get(image.get_attribute('src'), stream=True)
-        response_code = response.status_code
-        assert response_code == 200
-        self.logger.info("{} image is not broken".format(locator))
 
     def verify_images_are_not_broken(self, locator):
         try:
@@ -191,63 +179,8 @@ class BasePage:
         except requests.exceptions.InvalidSchema:
             print("Encountered InvalidSchema Exception")
 
-    def verify_image_is_not_broken_in_failed_case(self):
-        try:
-            image_list = self.driver.find_elements(By.XPATH, "//img")
-            response_code_list = []
-            for image in image_list:
-                time.sleep(2)
-                response = requests.get(image.get_attribute('src'), stream=True)
-                response_code = response.status_code
-                response_code_list.append(response_code)
-                print(response_code_list)
-                if response_code == 404:
-                    self.logger.info(image.get_attribute('src') + " is broken")
-                else:
-                    self.logger.info(image.get_attribute('src') + " is not broken")
-            assert 404 not in response_code_list
-        except requests.exceptions.MissingSchema:
-            print("Encountered MissingSchema Exception")
-        except requests.exceptions.InvalidSchema:
-            print("Encountered InvalidSchema Exception")
-
-    def verify_images_are_not_broken_on_home_page(self):
-        image_list = WebDriverWait(self.driver, 30).until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='image']//img")))
-        response_code_list = []
-        while True:
-            self.driver.execute_script('arguments[0].scrollIntoView();', image_list[-1])
-            try:
-                # Wait for more images to be loaded
-                WebDriverWait(self.driver, 30)\
-                    .until(lambda driver: len(WebDriverWait(self.driver, 30)
-                    .until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='image']//img")))) > len(image_list))
-                # Update images list
-                image_list = WebDriverWait(self.driver, 30).until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='image']//img")))
-            except:
-                # Break the loop in case no new names loaded after page scrolled down
-                break
-        try:
-            for image in image_list:
-                time.sleep(2)
-                response = requests.get(image.get_attribute('src'), stream=True)
-                response_code = response.status_code
-                response_code_list.append(response_code)
-                print(response_code_list)
-                if response_code == 404:
-                    self.logger.info(image.get_attribute('src') + " is broken")
-                else:
-                    self.logger.info(image.get_attribute('src') + " is not broken")
-            assert 404 not in response_code_list
-        except requests.exceptions.MissingSchema:
-            print("Encountered MissingSchema Exception")
-        except requests.exceptions.InvalidSchema:
-            print("Encountered InvalidSchema Exception")
-
-        # Print names list
-        # print([image.get_attribute('src') for image in images])
-
     def wait_element_presence(self, locator):
-        WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable((By.XPATH, locator)))
+        WebDriverWait(self.driver, 60).until(EC.element_to_be_clickable((By.XPATH, locator)))
         return self
 
     def switch_to_iframe(self, locator, timeout=60):
@@ -255,8 +188,8 @@ class BasePage:
             EC.frame_to_be_available_and_switch_to_it((By.XPATH, locator)))
 
     def is_present(self, locator):
-        self.wait_for_page_load()
-        self.scroll_into_locator(locator)
+        # self.wait_for_page_load()
+        # self.scroll_into_locator(locator)
         element = self.driver.find_elements(By.XPATH, locator)
         if len(element):
             self.logger.info("Element {} is present.".format(locator))
@@ -324,7 +257,36 @@ class BasePage:
             print("Encountered MissingSchema Exception")
         except requests.exceptions.InvalidSchema:
             print("Encountered InvalidSchema Exception")
-        print(response_code_list)
+
+    def verify_broken_images_failed(self, url):
+        global img
+        html = urlopen(url)
+        bs = BeautifulSoup(html, 'html.parser')
+        response_code_list = []
+        imgs = bs.find_all('img')
+        try:
+            for img in imgs:
+                if img.get('src').endswith(('.jpg', '.png', '.webp', 'svg')):
+                    response = requests.get("https://the-internet.herokuapp.com"+img.get('src'), stream=True)
+                    response_code = response.status_code
+                    if (response_code == 200):
+                       self.logger.info(img.get('src') + " is not broken")
+                       response_code_list.append(response_code)
+                    else:
+                        self.logger.info(img.get('src') + " is broken")
+                        response_code_list.append(response_code)
+                assert 404 not in response_code_list
+        except requests.exceptions.MissingSchema:
+            print("Encountered MissingSchema Exception")
+        except requests.exceptions.InvalidSchema:
+            print("Encountered InvalidSchema Exception")
+
+    def element_should_be_present(self, locator):
+        present = self.is_present(locator)
+        if not present:
+            raise AssertionError()
+        return self
+
 
 
 

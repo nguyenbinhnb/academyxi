@@ -1,0 +1,95 @@
+{ "accordion":[
+    {
+      "module": "MODULE 1: INTRODUCTION TO CUSTOMER EXPERIENCE (CX)",
+      "title": "Familiarise yourself with the background, core concepts, terminology, and applications of CX.",
+      "item1": "Introduction to Human-Centred Design (HCD)",
+      "item2": "The difference between CX, Service Design (SD), User Experience (UX), marketing and project management",
+      "item3": "The impact, roles and 10 principles of great CX",
+      "item4": "",
+      "item5": ""
+    },
+    {
+      "module": "MODULE 2: CUSTOMER EXPERIENCE (CX) RESEARCH",
+      "title": "Learn how to bring the voice of the customer into a business with research techniques and how to:",
+      "item1": "Conduct consumer interviews and surveys",
+      "item2": "Read, make sense of and apply data",
+      "item3": "Conduct effective desktop research",
+      "item4": "Know which technique to deploy and when",
+      "item5": ""
+    },
+  {
+      "module": "MODULE 3: CUSTOMER INSIGHTS AND DATA STORYTELLING",
+      "title": "Explore the importance of storytelling with data and the role of data in developing insights, learning how to:",
+      "item1": "Extract insights from data",
+      "item2": "Present your insights to stakeholders",
+      "item3": "Distribute insights to an organisation",
+      "item4": "",
+      "item5": ""
+    },
+  {
+      "module": "MODULE 4: CUSTOMER SEGMENTATION",
+      "title": "Learn about segmenting customers in a way that allows you to serve their different needs and validate your insights.",
+      "item1": "Introduction to segmentation",
+      "item2": "Psychographic segmentation",
+      "item3": "Who are your customers and what do they want?",
+      "item4": "How to validate your insights",
+      "item5": "How to apply your segmentation"
+    },
+  {
+      "module": "MODULE 5: STAKEHOLDER ENGAGEMENT",
+      "title": "Explore the role of CX in an organisation and the stakeholders involved.",
+      "item1": "CX and stakeholder engagement",
+      "item2": "The role of CX in an organisation",
+      "item3": "Understand and align with an organisation",
+      "item4": "Learn how to overcome operational restrictions",
+      "item5": ""
+    },
+  {
+      "module": "MODULE 6: CUSTOMER JOURNEY ANALYSIS",
+      "title": "Explore the customer journey, learning how to define and draw insights from it.",
+      "item1": "What is a customer journey?",
+      "item2": "The role of Service Design (SD) in journey mapping",
+      "item3": "How to map a customer journey and extract key insights",
+      "item4": "Introduction to journey metrics",
+      "item5": ""
+    },
+  {
+      "module": "MODULE 7: CUSTOMER EXPERIENCE (CX) STRATEGY",
+      "title": "Learn the key requirements and gain all the tools you need to develop your own CX strategy, making impactful CX decisions.",
+      "item1": "How to write a CX strategy",
+      "item2": "Presenting your CX strategy",
+      "item3": "Measuring your CX strategy",
+      "item4": "Creating an minimum viable product (MVP) CX strategy",
+      "item5": ""
+    },
+  {
+      "module": "MODULE 8: CUSTOMER JOURNEY OPTIMISATION",
+      "title": "Learn how to optimise your customer journey, ensuring it delivers desired outcomes by applying design thinking techniques.",
+      "item1": "How to prioritise optimisations",
+      "item2": "Applying design thinking to customer journeys",
+      "item3": "Defining the challenge",
+      "item4": "Generating, testing and implementing solutions",
+      "item5": ""
+    },
+  {
+      "module": "MODULE 9: CUSTOMER EXPERIENCE (CX) PROGRAM ROLLOUT",
+      "title": "Learn how to implement your CX strategy by converting it into an actionable program working with all the relevant stakeholders.",
+      "item1": "Creating a CX program rollout plan",
+      "item2": "Designing rollout training and support",
+      "item3": "How to ensure effective communications to support rollout",
+      "item4": "The use of technology in a rollout",
+      "item5": ""
+    },
+  {
+      "module": "MODULE 10: CUSTOMER EXPERIENCE (CX) MEASUREMENT",
+      "title": "Understand customer metrics, their role in measuring overall CX and the technology involved.",
+      "item1": "Benefits of NPS, CSAT and CES and when to use them",
+      "item2": "Custom metrics",
+      "item3": "CX measurement technology",
+      "item4": "Calculating the ROI of CX",
+      "item5": ""
+    }
+  ]
+}
+
+
