@@ -13,7 +13,7 @@ def setup(request):
     global driver
     options = Options()
     options.headless = True
-    options.add_argument("--window-size=1400,600")
+    options.add_argument("--window-size=1920,1200")
     options.add_argument("--start-maximized")
     options.add_argument("--user-agent=Chrome/77")
     capabilities = DesiredCapabilities.CHROME.copy()

@@ -15,16 +15,17 @@ class Test_001_Demo:
 
     @pytest.mark.sanity
     @pytest.mark.regression
+    # @pytest.mark.smoke
     def test_001_enroll_course(self):
         self.logger.info("Test_001_enroll_course")
         self.logger.info("Started Enroll Course")
         self.driver.get(self.baseURL)
         self.homePage = HomePage(self.driver)
-        self.homePage.click_enroll_a_course_button()
-        self.homePage.click_enroll_of_first_course()
-        self.checkoutPage = CheckoutPage(self.driver)
         self.basePage = BasePage(self.driver)
+        self.homePage.click_enroll_a_course_button()
+        self.homePage.click_enroll_first_course()
         self.basePage.verify_text_element_should_be_displayed('h2', 'Enrol With Us')
+        self.checkoutPage = CheckoutPage(self.driver)
         self.checkoutPage.set_first_name('Binh')
         self.checkoutPage.set_last_name('Nguyen')
         self.checkoutPage.set_street_address('hanoi 123')
