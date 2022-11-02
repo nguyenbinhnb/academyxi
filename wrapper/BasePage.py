@@ -154,7 +154,6 @@ class BasePage:
         self.wait_for_page_load()
         self.scroll_into_locator(locator)
         actual_value = self.driver.find_element(By.XPATH, locator).value_of_css_property(property)
-        print(actual_value)
         assert actual_value == expected_value
         self.logger.info("Validation {} Property Passed: Actual: {} and Expected: {}".format(property, actual_value, expected_value))
 
@@ -188,8 +187,6 @@ class BasePage:
             EC.frame_to_be_available_and_switch_to_it((By.XPATH, locator)))
 
     def is_present(self, locator):
-        # self.wait_for_page_load()
-        # self.scroll_into_locator(locator)
         element = self.driver.find_elements(By.XPATH, locator)
         if len(element):
             self.logger.info("Element {} is present.".format(locator))
@@ -216,10 +213,8 @@ class BasePage:
             for link in working_link_list:
                 time.sleep(2)
                 response = requests.get(link.get_attribute('href'), stream=True)
-                print(response)
                 response_code = response.status_code
                 response_code_list.append(response_code)
-                print (response_code_list)
                 if response_code == 200:
                     self.logger.info(link.get_attribute('href') + " is present")
                 else:

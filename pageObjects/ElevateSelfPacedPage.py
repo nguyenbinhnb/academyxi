@@ -29,7 +29,9 @@ class ElevateSelfPacedPage(BasePage):
             self.element_should_be_present(self.p_span_contains_text.format(obj['accordion'][i]["title"]))
             self.element_should_be_present(self.li_span_contains_text.format(obj['accordion'][i]["item1"]))
             self.element_should_be_present(self.li_span_contains_text.format(obj['accordion'][i]["item2"]))
-            self.element_should_be_present(self.li_span_contains_text.format(obj['accordion'][i]["item3"]))
+            encoded = obj['accordion'][i]["item3"].encode('cp1252')
+            item3 = encoded.decode('utf-8')
+            self.element_should_be_present(self.li_span_contains_text.format(item3))
             if obj['accordion'][i]["item4"] != "":
                 self.element_should_be_present(self.li_span_contains_text.format(obj['accordion'][i]["item4"]))
             if obj['accordion'][i]["item5"] != "":

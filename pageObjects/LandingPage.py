@@ -13,7 +13,7 @@ class LandingPage(BasePage):
         self.element_by_finder = ElementByLocator()
 
     def verify_presence_of_ctas_on_landing_page(self):
-        self.is_present(self.download_course_guide_button)
+        self.element_should_be_present(self.download_course_guide_button)
 
     def verify_color_of_ctas_on_landing_page(self):
         time.sleep(3)
