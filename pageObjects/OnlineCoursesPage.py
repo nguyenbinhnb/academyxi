@@ -20,9 +20,9 @@ class OnlineCoursesPage(BasePage):
         self.scroll_down_to_bottom()
         self.scroll_down_to_top()
         ActionChains(self.driver).move_by_offset(20, 20).click().perform()
-        self.is_present(self.download_course_guide_button)
-        self.is_present(self.enrol_now_button)
-        self.is_present(self.learn_more_button)
+        self.element_should_be_present(self.download_course_guide_button)
+        self.element_should_be_present(self.enrol_now_button)
+        self.element_should_be_present(self.learn_more_button)
 
     def verify_color_of_ctas_on_online_courses_page(self):
         time.sleep(3)

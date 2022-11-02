@@ -1,6 +1,7 @@
 import time
 
 import pytest
+from selenium.webdriver import ActionChains
 
 from pageObjects.BuyNowPage import BuyNowPage
 from pageObjects.HomePage import HomePage
@@ -33,7 +34,11 @@ class Test_001_Call_To_Actions:
         self.logger.info("Started Go To Online Course Page")
         self.driver.get("https://academyxi.com/online-courses/")
         self.onlineCoursesPage = OnlineCoursesPage(self.driver)
+        self.basePage = BasePage(self.driver)
+        self.basePage.wait_for_page_load(90)
+        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         time.sleep(30)
+        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         self.onlineCoursesPage.verify_presence_of_ctas_on_online_courses_page()
         self.onlineCoursesPage.verify_color_of_ctas_on_online_courses_page()
         self.onlineCoursesPage.verify_working_link_of_ctas_on_online_courses_page()

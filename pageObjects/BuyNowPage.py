@@ -13,8 +13,8 @@ class BuyNowPage(BasePage):
         self.element_by_finder = ElementByLocator()
 
     def verify_presence_of_ctas_on_buy_now_page(self):
-        self.is_present(self.download_course_guide_button)
-        self.is_present(self.enrol_now_button)
+        self.element_should_be_present(self.download_course_guide_button)
+        self.element_should_be_present(self.enrol_now_button)
 
     def verify_color_of_ctas_on_buy_now_page(self):
         self.verify_css_property(self.download_course_guide_button, "background-color", "rgba(54, 115, 252, 1)")

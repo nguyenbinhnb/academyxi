@@ -79,10 +79,10 @@ class HomePage(BasePage):
         self.verify_css_property(self.software_engineer_transform_course_xpath, property, expected_value)
 
     def verify_presence_of_ctas_on_home_page(self):
-        self.is_present(self.enroll_a_course_button_xpath)
-        self.is_present(self.a_with_text.format("Courses for individuals"))
-        self.is_present(self.a_with_text.format("Training for teams"))
-        self.is_present(self.a_with_text.format("Talent & recruitment "))
+        self.element_should_be_present(self.enroll_a_course_button_xpath)
+        self.element_should_be_present(self.a_with_text.format("Courses for individuals"))
+        self.element_should_be_present(self.a_with_text.format("Training for teams"))
+        self.element_should_be_present(self.a_with_text.format("Talent & recruitment "))
 
     def verify_color_of_ctas_on_home_page(self):
         time.sleep(3)
