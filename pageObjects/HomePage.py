@@ -41,7 +41,8 @@ class HomePage(BasePage):
         self.element_by_finder = ElementByLocator()
 
     def click_enroll_a_course_button(self):
-         self.click_element(self.enroll_a_course_button_xpath)
+        self.wait_element_presence(self.enroll_a_course_button_xpath)
+        self.click_element_by_js(self.enroll_a_course_button_xpath)
 
     def click_enroll_first_course(self):
         self.wait_element_presence(self.enroll_first_course)
@@ -73,7 +74,7 @@ class HomePage(BasePage):
         self.click_element_by_js(self.i_am_over_18_xpath)
         self.wait_for_page_load()
         self.click_element_by_js(self.download_button_xpath)
-        time.sleep(10)
+        time.sleep(40)
 
     def verify_locator_css_value(self, property, expected_value):
         self.verify_css_property(self.software_engineer_transform_course_xpath, property, expected_value)

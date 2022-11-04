@@ -24,8 +24,8 @@ def setup(request):
     driver = webdriver.Chrome(executable_path="chromedriver.exe", options=options, desired_capabilities=capabilities)
     driver.maximize_window()
     request.cls.driver = driver
-    # yield driver
-    # driver.quit()
+    yield driver
+    driver.quit()
 
 
 def pytest_addoption(parser):  # This will get the value from CLI /hooks
@@ -66,7 +66,6 @@ def pytest_runtest_makereport(item):
             report_directory = os.path.dirname(item.config.option.htmlpath)
             file_name = report.nodeid.replace("::", "_") + ".png"
             destinationFile = os.path.join(report_directory, file_name)
-            # destinationFile = os.path.join("Screenshots", "main.png")
             driver.save_screenshot(destinationFile)
             if file_name:
                 html = '<div><img src="%s" alt="screenshot" style="width:350px;height:228px;" ' \
