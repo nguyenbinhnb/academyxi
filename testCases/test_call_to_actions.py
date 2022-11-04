@@ -18,7 +18,7 @@ class Test_001_Call_To_Actions:
     logger = LogGen.loggen()
     baseURL = ReadConfig.getApplicationURL("baseURL")
 
-    # @pytest.mark.smoke
+    @pytest.mark.smoke
     def test_001_call_to_actions_on_home_page(self):
         self.logger.info("Test_001_call_to_actions_on_home_page")
         self.logger.info("Started Go To Home page")
@@ -28,36 +28,37 @@ class Test_001_Call_To_Actions:
         self.homePage.verify_color_of_ctas_on_home_page()
         self.homePage.verify_working_link_of_ctas_on_home_page()
 
-    # @pytest.mark.smoke
+    @pytest.mark.smoke
     def test_002_call_to_actions_on_online_courses_page(self):
         self.logger.info("Test_001_call_to_actions_on_online_courses_page")
         self.logger.info("Started Go To Online Course Page")
-        self.driver.get("https://academyxi.com/online-courses/")
-        self.onlineCoursesPage = OnlineCoursesPage(self.driver)
+        self.driver.get(self.baseURL+"online-courses/")
         self.basePage = BasePage(self.driver)
-        self.basePage.wait_for_page_load(90)
+        self.basePage.wait_for_page_load()
         ActionChains(self.driver).move_by_offset(20, 20).click().perform()
-        time.sleep(30)
+        time.sleep(60)
         ActionChains(self.driver).move_by_offset(20, 20).click().perform()
+        self.onlineCoursesPage = OnlineCoursesPage(self.driver)
         self.onlineCoursesPage.verify_presence_of_ctas_on_online_courses_page()
         self.onlineCoursesPage.verify_color_of_ctas_on_online_courses_page()
         self.onlineCoursesPage.verify_working_link_of_ctas_on_online_courses_page()
 
-    # @pytest.mark.smoke
+    @pytest.mark.smoke
     def test_003_call_to_actions_on_buy_now_page(self):
         self.logger.info("Test_001_call_to_actions_on_buy_now_page")
         self.logger.info("Started Go To Buy Now Page")
         self.driver.get("https://academyxi.com/buy-now/")
         self.buyNowPage = BuyNowPage(self.driver)
+        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         self.buyNowPage.verify_presence_of_ctas_on_buy_now_page()
         self.buyNowPage.verify_color_of_ctas_on_buy_now_page()
         self.buyNowPage.verify_working_link_of_ctas_on_buy_now_page()
 
-    # @pytest.mark.smoke
+    @pytest.mark.smoke
     def test_004_call_to_actions_on_landing_page(self):
         self.logger.info("Test_001_call_to_actions_on_landing_page")
         self.logger.info("Started Go To Landing Page")
-        self.driver.get("https://academyxi.com/lp/software-engineering-online/")
+        self.driver.get(self.baseURL+"lp/software-engineering-online/")
         self.basePage = BasePage(self.driver)
         self.landingPage = LandingPage(self.driver)
         self.basePage.scroll_down_to_bottom()

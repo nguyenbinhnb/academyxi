@@ -10,7 +10,6 @@ from selenium.common import TimeoutException, WebDriverException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-# from webdriver_manager.core import driver
 
 from wrapper.elementfinder import ElementByLocator
 from utilities.customLogger import LogGen
@@ -31,11 +30,11 @@ class BasePage:
         self.timeout = 60
         self.implicitly_wait = 20
 
-    def click_element(self, locator, timeout=10):
+    def click_element(self, locator, timeout=30):
         return WebDriverWait(self.driver, timeout).until(
             EC.element_to_be_clickable(self.element_by_finder.by_locator(locator))).click()
 
-    def click_element_by_js(self, locator, timeout=10):
+    def click_element_by_js(self, locator, timeout=30):
         element = WebDriverWait(self.driver, timeout).until(
             EC.element_to_be_clickable((By.XPATH, locator)))
         if element:

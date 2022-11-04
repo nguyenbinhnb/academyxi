@@ -14,8 +14,8 @@ class Test_001_Demo:
     logger = LogGen.loggen()
 
     @pytest.mark.sanity
-    @pytest.mark.regression
-    # @pytest.mark.smoke
+    # @pytest.mark.regression
+    @pytest.mark.smoke
     def test_001_enroll_course(self):
         self.logger.info("Test_001_enroll_course")
         self.logger.info("Started Enroll Course")
