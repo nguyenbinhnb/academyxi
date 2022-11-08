@@ -24,6 +24,7 @@ class Test_001_Demo:
         self.basePage = BasePage(self.driver)
         self.homePage.click_enroll_a_course_button()
         self.homePage.click_enroll_first_course()
+        self.basePage.wait_for_page_load()
         self.basePage.verify_text_element_should_be_displayed('h2', 'Enrol With Us')
         self.checkoutPage = CheckoutPage(self.driver)
         self.checkoutPage.set_first_name('Binh')
