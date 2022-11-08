@@ -11,7 +11,7 @@ from wrapper.elementfinder import ElementByLocator
 
 class HomePage(BasePage):
 
-    enroll_a_course_button_xpath = "//div[@data-element_type='widget'][5]//span[text()='Enrol in a course' and contains(@class,'text-empty')]"
+    enroll_a_course_button_xpath = "//span[text()='Enrol in a course' and contains(@class,'text-empty')]"
     enroll_first_course = "//a[@data-courseid='2463']"
     close_chat_box_button_css_selector = "//button[@aria-label='Minimize window']"
     download_iframe= "//iframe[contains(@src, 'is_show_course_price=1')]"
@@ -34,6 +34,7 @@ class HomePage(BasePage):
     h3_with_text = "//h3[text()='{}']"
     p_contains_class = "//p[contains(@class, '{}')]//select"
     options_in_dropdown = "//p[contains(@class, '{}')]//option[text()='{}']"
+    captcha_checkbox = "//p[@class='form-field  Show_Course_Price pd-hidden  hidden   ']//following-sibling::div//iframe[@title='reCAPTCHA']"
 
 
     def __init__(self, driver):
@@ -73,8 +74,13 @@ class HomePage(BasePage):
         self.input_text(self.email_xpath, email)
         self.click_element_by_js(self.i_am_over_18_xpath)
         self.wait_for_page_load()
-        self.click_element_by_js(self.download_button_xpath)
-        time.sleep(40)
+        time.sleep(30)
+        if self.is_visible(self.captcha_checkbox):
+            self.click_element(self.captcha_checkbox)
+            time.sleep(30)
+        self.click_element(self.download_button_xpath)
+        time.sleep(30)
+
 
     def verify_locator_css_value(self, property, expected_value):
         self.verify_css_property(self.software_engineer_transform_course_xpath, property, expected_value)

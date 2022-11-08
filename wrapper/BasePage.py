@@ -99,6 +99,7 @@ class BasePage:
         return self
 
     def verify_text_element_should_be_displayed(self, tag, text):
+        time.sleep(20)
         self.wait_element_presence(self.tag_with_text_xpath.format(tag, text))
         self.element_should_be_visible(self.tag_with_text_xpath.format(tag, text), "Element is not present")
         return self
