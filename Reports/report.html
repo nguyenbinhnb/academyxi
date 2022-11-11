@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>Test Report</title>
+    <title>report.html</title>
     <link href="assets/style.css" rel="stylesheet" type="text/css"/></head>
   <body onLoad="init()">
     <script>/* This Source Code Form is subject to the terms of the Mozilla Public
@@ -70,9 +70,19 @@ function hideExtras(colresultElem) {
 }
 
 function showFilters() {
+    let visibleString = getQueryParameter('visible') || 'all';
+    visibleString = visibleString.toLowerCase();
+    const checkedItems = visibleString.split(',');
+
     const filterItems = document.getElementsByClassName('filter');
-    for (let i = 0; i < filterItems.length; i++)
+    for (let i = 0; i < filterItems.length; i++) {
         filterItems[i].hidden = false;
+
+        if (visibleString != 'all') {
+            filterItems[i].checked = checkedItems.includes(filterItems[i].getAttribute('data-test-result'));
+            filterTable(filterItems[i]);
+        }
+    }
 }
 
 function addCollapse() {
@@ -243,45 +253,18 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>report.html</h1>
-    <p>Report generated on 02-Nov-2022 at 08:24:53 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <p>Report generated on 11-Nov-2022 at 16:19:40 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
     <h2>Environment</h2>
     <table id="environment">
-      <tr>
-        <td>BUILD_ID</td>
-        <td>18</td></tr>
-      <tr>
-        <td>BUILD_NUMBER</td>
-        <td>18</td></tr>
-      <tr>
-        <td>BUILD_TAG</td>
-        <td>jenkins-smoke_test-18</td></tr>
-      <tr>
-        <td>BUILD_URL</td>
-        <td><a href="http://13.210.111.169:8080/job/smoke_test/18/" target="_blank">http://13.210.111.169:8080/job/smoke_test/18/</a></td></tr>
-      <tr>
-        <td>CI</td>
-        <td>true</td></tr>
-      <tr>
-        <td>EXECUTOR_NUMBER</td>
-        <td>0</td></tr>
-      <tr>
-        <td>JENKINS_URL</td>
-        <td><a href="http://13.210.111.169:8080/" target="_blank">http://13.210.111.169:8080/</a></td></tr>
-      <tr>
-        <td>JOB_NAME</td>
-        <td>smoke_test</td></tr>
       <tr>
         <td>Module Name</td>
         <td>Verify Academyxi Web</td></tr>
       <tr>
-        <td>NODE_NAME</td>
-        <td>built-in</td></tr>
-      <tr>
         <td>Packages</td>
-        <td>{"pluggy": "1.0.0", "py": "1.11.0", "pytest": "7.1.3"}</td></tr>
+        <td>{"pluggy": "1.0.0", "pytest": "7.2.0"}</td></tr>
       <tr>
         <td>Platform</td>
-        <td>Linux-5.15.0-1022-aws-x86_64-with-glibc2.29</td></tr>
+        <td>Linux-5.15.0-52-generic-x86_64-with-glibc2.29</td></tr>
       <tr>
         <td>Project Name</td>
         <td>Academyxi Web</td></tr>
@@ -290,13 +273,10 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>3.8.10</td></tr>
       <tr>
         <td>Tester</td>
-        <td>Binh</td></tr>
-      <tr>
-        <td>WORKSPACE</td>
-        <td>/var/lib/jenkins/workspace/smoke_test</td></tr></table>
+        <td>Binh</td></tr></table>
     <h2>Summary</h2>
-    <p>2 tests ran in 43.84 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">1 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">1 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <p>1 tests ran in 6.95 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">1 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -307,37 +287,75 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
           <th class="sortable links" col="links">Links</th></tr>
         <tr hidden="true" id="not-found-message">
           <th colspan="4">No results found. Try to check the filters</th></tr></thead>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-name">test_main_flow.py::Test_001_Demo::test_001_download_course_guide</td>
-          <td class="col-duration">40.13</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div><div><img src="test_main_flow.py_Test_001_Demo_test_001_download_course_guide.png" alt="screenshot" style="width:350px;height:228px;" onclick="window.open(this.src)" align="right"/></div></div>
-            <div class="log">self = &lt;testCases.test_main_flow.Test_001_Demo object at 0x7f3c9bb40430&gt;<br/><br/>    @pytest.mark.sanity<br/>    @pytest.mark.regression<br/>    @pytest.mark.smoke<br/>    def test_001_download_course_guide(self):<br/>        self.logger.info(&quot;Test_001_main_flow&quot;)<br/>        self.logger.info(&quot;Started Go To Home page&quot;)<br/>        self.driver.get(self.baseURL)<br/>        self.basePage = BasePage(self.driver)<br/>        self.basePage.verify_text_element_should_be_displayed(&#x27;a&#x27;,&#x27;Discover your  learning path&#x27;)<br/>        self.basePage.verify_text_element_should_be_displayed(&#x27;a&#x27;, &#x27;Upskill your organisation&#x27;)<br/>        self.homePage = HomePage(self.driver)<br/>        self.homePage.click_enroll_a_course_button()<br/>        self.basePage.verify_text_element_should_be_displayed(&#x27;span&#x27;, &#x27;Academy Xi’s expert-led courses and workshops are designed to help you learn, practice and embed new knowledge, preparing you to shape your career and change the world.&#x27;)<br/>        self.basePage.verify_course_item_should_be_displayed(&#x27;Data Analytics Pro&#x27;)<br/>        self.homePage.click_page_number(&#x27;2&#x27;)<br/>&gt;       self.homePage.download_course_guide(&#x27;aXi Tes&#x27;, &#x27;Sanest&#x27;, &#x27;355664455&#x27;, &#x27;testing@gmail.com&#x27;,&#x27;React&#x27;, &#x27;Change or start a new career&#x27;)<br/><br/>testCases/test_main_flow.py:33: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>pageObjects/HomePage.py:72: in download_course_guide<br/>    self.scroll_into_locator(self.download_button_xpath)<br/>wrapper/BasePage.py:63: in scroll_into_locator<br/>    self.wait_element_presence(locator)<br/>wrapper/BasePage.py:210: in wait_element_presence<br/>    WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, locator)))<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;selenium.webdriver.support.wait.WebDriverWait (session=&quot;58fffbf4f3f4c6222a5aadea835b86f4&quot;)&gt;<br/>method = &lt;function element_to_be_clickable.&lt;locals&gt;._predicate at 0x7f3c9ba745e0&gt;<br/>message = &#x27;&#x27;<br/><br/>    def until(self, method, message: str = &quot;&quot;):<br/>        &quot;&quot;&quot;Calls the method provided with the driver as an argument until the \<br/>        return value does not evaluate to ``False``.<br/>    <br/>        :param method: callable(WebDriver)<br/>        :param message: optional message for :exc:`TimeoutException`<br/>        :returns: the result of the last call to `method`<br/>        :raises: :exc:`selenium.common.exceptions.TimeoutException` if timeout occurs<br/>        &quot;&quot;&quot;<br/>        screen = None<br/>        stacktrace = None<br/>    <br/>        end_time = time.monotonic() + self._timeout<br/>        while True:<br/>            try:<br/>                value = method(self._driver)<br/>                if value:<br/>                    return value<br/>            except self._ignored_exceptions as exc:<br/>                screen = getattr(exc, &#x27;screen&#x27;, None)<br/>                stacktrace = getattr(exc, &#x27;stacktrace&#x27;, None)<br/>            time.sleep(self._poll)<br/>            if time.monotonic() &gt; end_time:<br/>                break<br/>&gt;       raise TimeoutException(message, screen, stacktrace)<br/><span class="error">E       selenium.common.exceptions.TimeoutException: Message: </span><br/><span class="error">E       Stacktrace:</span><br/><span class="error">E       #0 0x55fe4fefc2c3 &lt;unknown&gt;</span><br/><span class="error">E       #1 0x55fe4fd0583a &lt;unknown&gt;</span><br/><span class="error">E       #2 0x55fe4fd3e985 &lt;unknown&gt;</span><br/><span class="error">E       #3 0x55fe4fd3eb61 &lt;unknown&gt;</span><br/><span class="error">E       #4 0x55fe4fd76d14 &lt;unknown&gt;</span><br/><span class="error">E       #5 0x55fe4fd5cf6d &lt;unknown&gt;</span><br/><span class="error">E       #6 0x55fe4fd74a50 &lt;unknown&gt;</span><br/><span class="error">E       #7 0x55fe4fd5cd63 &lt;unknown&gt;</span><br/><span class="error">E       #8 0x55fe4fd317e3 &lt;unknown&gt;</span><br/><span class="error">E       #9 0x55fe4fd32a21 &lt;unknown&gt;</span><br/><span class="error">E       #10 0x55fe4ff4a18e &lt;unknown&gt;</span><br/><span class="error">E       #11 0x55fe4ff4d622 &lt;unknown&gt;</span><br/><span class="error">E       #12 0x55fe4ff30aae &lt;unknown&gt;</span><br/><span class="error">E       #13 0x55fe4ff4e2a3 &lt;unknown&gt;</span><br/><span class="error">E       #14 0x55fe4ff24ecf &lt;unknown&gt;</span><br/><span class="error">E       #15 0x55fe4ff6e588 &lt;unknown&gt;</span><br/><span class="error">E       #16 0x55fe4ff6e706 &lt;unknown&gt;</span><br/><span class="error">E       #17 0x55fe4ff888b2 &lt;unknown&gt;</span><br/><span class="error">E       #18 0x7f6ab18c3609 &lt;unknown&gt;</span><br/><br/>/usr/local/lib/python3.8/dist-packages/selenium/webdriver/support/wait.py:90: TimeoutException<br/> -------------------------------Captured log setup------------------------------- <br/>INFO     WDM:logger.py:11 ====== WebDriver manager ======
-INFO     WDM:logger.py:11 Get LATEST chromedriver version for google-chrome 106.0.5249
-INFO     WDM:logger.py:11 Driver [/var/lib/jenkins/.wdm/drivers/chromedriver/linux64/106.0.5249/chromedriver] found in cache<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:test_main_flow.py:22 Test_001_main_flow
-INFO     root:test_main_flow.py:23 Started Go To Home page
-INFO     root:BasePage.py:93 Verifying element &#x27;//a[text()=&#x27;Discover your  learning path&#x27;]&#x27; is present.
-INFO     root:BasePage.py:75 Element &#x27;//a[text()=&#x27;Discover your  learning path&#x27;]&#x27; is present.
-INFO     root:BasePage.py:93 Verifying element &#x27;//a[text()=&#x27;Upskill your organisation&#x27;]&#x27; is present.
-INFO     root:BasePage.py:75 Element &#x27;//a[text()=&#x27;Upskill your organisation&#x27;]&#x27; is present.
-INFO     root:BasePage.py:93 Verifying element &#x27;//span[text()=&#x27;Academy Xi’s expert-led courses and workshops are designed to help you learn, practice and embed new knowledge, preparing you to shape your career and change the world.&#x27;]&#x27; is present.
-INFO     root:BasePage.py:75 Element &#x27;//span[text()=&#x27;Academy Xi’s expert-led courses and workshops are designed to help you learn, practice and embed new knowledge, preparing you to shape your career and change the world.&#x27;]&#x27; is present.
-INFO     root:BasePage.py:93 Verifying element &#x27;//div[@data-name-courses= &#x27;Data Analytics Pro&#x27;]&#x27; is present.
-INFO     root:BasePage.py:75 Element &#x27;//div[@data-name-courses= &#x27;Data Analytics Pro&#x27;]&#x27; is present.<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">test_frequent_failures.py::Test_001_Frequent_Failures::test_002_frequent_failures_on_blog_page</td>
-          <td class="col-duration">3.20</td>
+          <td class="col-name">test_frequent_failures.py::Test_001_Frequent_Failures::test_007_frequent_failures_on_elevate_self_paced_page</td>
+          <td class="col-duration">6.64</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="log"> -------------------------------Captured log setup------------------------------- <br/>INFO     WDM:logger.py:11 ====== WebDriver manager ======
 INFO     WDM:logger.py:11 Get LATEST chromedriver version for google-chrome 106.0.5249
-INFO     WDM:logger.py:11 Driver [/var/lib/jenkins/.wdm/drivers/chromedriver/linux64/106.0.5249/chromedriver] found in cache<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:test_frequent_failures.py:37 Test_002_frequent_failures_on_blog_page
-INFO     root:test_frequent_failures.py:38 Started Go To Blog page
-INFO     root:BlogPage.py:19 There are 12 articles on Blog Page<br/></div></td></tr></tbody></table></body></html>
+INFO     WDM:logger.py:11 Driver [/home/longdt/.wdm/drivers/chromedriver/linux64/106.0.5249/chromedriver] found in cache<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:test_frequent_failures.py:88 Test_006_frequent_failures_on_landing_page
+INFO     root:test_frequent_failures.py:90 Verify broken images on Elevate Self Paced page
+INFO     root:ElevateSelfPacedPage.py:25 Verify accordions are displayed
+INFO     root:BasePage.py:192 Element //a[text() =&quot;MODULE 1: INTRODUCTION TO CUSTOMER EXPERIENCE (CX)&quot;] is present.
+INFO     root:BasePage.py:192 Element //p//span[contains(text(),&quot;Familiarise yourself with the background, core concepts, terminology, and applications of CX.&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Introduction to Human-Centred Design (HCD)&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;The difference between CX, Service Design (SD), User Experience (UX), marketing and project management&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;The impact, roles and 10 principles of great CX&quot;)] is present.
+INFO     root:BasePage.py:192 Element //a[text() =&quot;MODULE 2: CUSTOMER EXPERIENCE (CX) RESEARCH&quot;] is present.
+INFO     root:BasePage.py:192 Element //p//span[contains(text(),&quot;Learn how to bring the voice of the customer into a business with research techniques and how to:&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Conduct consumer interviews and surveys&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Read, make sense of and apply data&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Conduct effective desktop research&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Know which technique to deploy and when&quot;)] is present.
+INFO     root:BasePage.py:192 Element //a[text() =&quot;MODULE 3: CUSTOMER INSIGHTS AND DATA STORYTELLING&quot;] is present.
+INFO     root:BasePage.py:192 Element //p//span[contains(text(),&quot;Explore the importance of storytelling with data and the role of data in developing insights, learning how to:&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Extract insights from data&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Present your insights to stakeholders&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Distribute insights to an organisation&quot;)] is present.
+INFO     root:BasePage.py:192 Element //a[text() =&quot;MODULE 4: CUSTOMER SEGMENTATION&quot;] is present.
+INFO     root:BasePage.py:192 Element //p//span[contains(text(),&quot;Learn about segmenting customers in a way that allows you to serve their different needs and validate your insights.&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Introduction to segmentation&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Psychographic segmentation&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Who are your customers and what do they want?&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;How to validate your insights&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;How to apply your segmentation&quot;)] is present.
+INFO     root:BasePage.py:192 Element //a[text() =&quot;MODULE 5: STAKEHOLDER ENGAGEMENT&quot;] is present.
+INFO     root:BasePage.py:192 Element //p//span[contains(text(),&quot;Explore the role of CX in an organisation and the stakeholders involved.&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;CX and stakeholder engagement&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;The role of CX in an organisation&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Understand and align with an organisation’s vision&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Learn how to overcome operational restrictions&quot;)] is present.
+INFO     root:BasePage.py:192 Element //a[text() =&quot;MODULE 6: CUSTOMER JOURNEY ANALYSIS&quot;] is present.
+INFO     root:BasePage.py:192 Element //p//span[contains(text(),&quot;Explore the customer journey, learning how to define and draw insights from it.&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;What is a customer journey?&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;The role of Service Design (SD) in journey mapping&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;How to map a customer journey and extract key insights&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Introduction to journey metrics&quot;)] is present.
+INFO     root:BasePage.py:192 Element //a[text() =&quot;MODULE 7: CUSTOMER EXPERIENCE (CX) STRATEGY&quot;] is present.
+INFO     root:BasePage.py:192 Element //p//span[contains(text(),&quot;Learn the key requirements and gain all the tools you need to develop your own CX strategy, making impactful CX decisions.&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;How to write a CX strategy&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Presenting your CX strategy&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Measuring your CX strategy&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Creating an minimum viable product (MVP) CX strategy&quot;)] is present.
+INFO     root:BasePage.py:192 Element //a[text() =&quot;MODULE 8: CUSTOMER JOURNEY OPTIMISATION&quot;] is present.
+INFO     root:BasePage.py:192 Element //p//span[contains(text(),&quot;Learn how to optimise your customer journey, ensuring it delivers desired outcomes by applying design thinking techniques.&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;How to prioritise optimisations&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Applying design thinking to customer journeys&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Defining the challenge&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Generating, testing and implementing solutions&quot;)] is present.
+INFO     root:BasePage.py:192 Element //a[text() =&quot;MODULE 9: CUSTOMER EXPERIENCE (CX) PROGRAM ROLLOUT&quot;] is present.
+INFO     root:BasePage.py:192 Element //p//span[contains(text(),&quot;Learn how to implement your CX strategy by converting it into an actionable program working with all the relevant stakeholders.&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Creating a CX program rollout plan&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Designing rollout training and support&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;How to ensure effective communications to support rollout&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;The use of technology in a rollout&quot;)] is present.
+INFO     root:BasePage.py:192 Element //a[text() =&quot;MODULE 10: CUSTOMER EXPERIENCE (CX) MEASUREMENT&quot;] is present.
+INFO     root:BasePage.py:192 Element //p//span[contains(text(),&quot;Understand customer metrics, their role in measuring overall CX and the technology involved.&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Benefits of NPS, CSAT and CES and when to use them&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Custom metrics&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;CX measurement technology&quot;)] is present.
+INFO     root:BasePage.py:192 Element //li//span[contains(text(),&quot;Calculating the ROI of CX&quot;)] is present.<br/></div></td></tr></tbody></table></body></html>
