@@ -38,3 +38,6 @@ MANIFEST
 
 # Individual project
 *.log
+Logs/
+Reports/
+Screenshots/
