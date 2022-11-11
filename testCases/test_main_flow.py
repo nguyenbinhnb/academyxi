@@ -31,7 +31,7 @@ class Test_001_Demo:
         self.basePage.verify_text_element_should_be_displayed('span', 'Academy Xi’s expert-led courses and workshops are designed to help you learn, practice and embed new knowledge, preparing you to shape your career and change the world.')
         self.basePage.verify_course_item_should_be_displayed('Data Analytics Pro')
         self.homePage.click_page_number('2')
-        self.homePage.download_course_guide('aXi Tes', 'Sanest', '355664455', 'testing@gmail.com','Customer Experience', 'Change or start a new career')
+        self.homePage.download_course_guide('sandbox', 'sandbox', '082934290', 'testing@gmail.com','Customer Experience', 'Change or start a new career')
         self.thankYouPage = ThankYouPage(self.driver)
         self.basePage.verify_user_redirect_to_correct_location('https://academyxi.com/online-courses/customer-experience/course-guide/thank-you/')
         self.thankYouPage.verify_course_guide_pdf_files()
