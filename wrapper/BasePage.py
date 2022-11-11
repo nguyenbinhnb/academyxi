@@ -75,16 +75,16 @@ class BasePage:
                 self.logger.info("Element '%s' is present." % locator)
                 return True
             else:
-                 self.driver.save_screenshot(".\\Screenshots\\" + f".test_elementDisplay_{num}.png")
+                 self.driver.save_screenshot("./Screenshots/" + f".test_elementDisplay_{num}.png")
                  print("element is not present")
                  self.logger.info("Element '%s' is not visible." % locator)
             return False
         except TimeoutException:
-            self.driver.save_screenshot(".\\Screenshots\\" + f".test_elementDisplay_{num}.png")
+            self.driver.save_screenshot("./Screenshots/" + f".test_elementDisplay_{num}.png")
             self.logger.warning("Fail to locate Element: {} in {} sec.".format(locator, 20))
             return False
         except WebDriverException as e:
-            self.driver.save_screenshot(".\\Screenshots\\" + f".test_elementDisplay_{num}.png")
+            self.driver.save_screenshot("./Screenshots/" + f".test_elementDisplay_{num}.png")
             self.logger.warning("Received WebDriver Exception for locator: {} in {} sec.".format(locator, 20))
             print(e)
             return False
@@ -137,7 +137,7 @@ class BasePage:
                                                                                               expected_text))
             except AssertionError:
                 self.logger.error("Soft Validation FAILED: Actual: {} and Expected: {}".format(actual_text, expected_text))
-                self.driver.save_screenshot(".\\Screenshots\\" + f".test_assertTwoValues_{num}.png")
+                self.driver.save_screenshot("./Screenshots/" + f".test_assertTwoValues_{num}.png")
                 self.col_soft_validation_lect_failed_data.append(
                     "Soft Validation FAILED: PAGE: {}, Actual: {} and Expected: {}".format(
                         self.get_title(), actual_text, expected_text)

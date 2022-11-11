@@ -1,2 +1,19 @@
-10/21/2022 10:57:45 PM root INFO:Test_001_main_flow
-10/21/2022 10:57:45 PM root INFO:Started Go To Home page
+11/02/2022 08:24:09 AM WDM INFO:====== WebDriver manager ======
+11/02/2022 08:24:09 AM WDM INFO:Get LATEST chromedriver version for google-chrome 106.0.5249
+11/02/2022 08:24:09 AM WDM INFO:Driver [/var/lib/jenkins/.wdm/drivers/chromedriver/linux64/106.0.5249/chromedriver] found in cache
+11/02/2022 08:24:10 AM root INFO:Test_002_frequent_failures_on_blog_page
+11/02/2022 08:24:10 AM root INFO:Started Go To Blog page
+11/02/2022 08:24:12 AM root INFO:There are 12 articles on Blog Page
+11/02/2022 08:24:12 AM WDM INFO:====== WebDriver manager ======
+11/02/2022 08:24:12 AM WDM INFO:Get LATEST chromedriver version for google-chrome 106.0.5249
+11/02/2022 08:24:12 AM WDM INFO:Driver [/var/lib/jenkins/.wdm/drivers/chromedriver/linux64/106.0.5249/chromedriver] found in cache
+11/02/2022 08:24:13 AM root INFO:Test_001_main_flow
+11/02/2022 08:24:13 AM root INFO:Started Go To Home page
+11/02/2022 08:24:14 AM root INFO:Verifying element '//a[text()='Discover your  learning path']' is present.
+11/02/2022 08:24:14 AM root INFO:Element '//a[text()='Discover your  learning path']' is present.
+11/02/2022 08:24:14 AM root INFO:Verifying element '//a[text()='Upskill your organisation']' is present.
+11/02/2022 08:24:14 AM root INFO:Element '//a[text()='Upskill your organisation']' is present.
+11/02/2022 08:24:14 AM root INFO:Verifying element '//span[text()='Academy Xi’s expert-led courses and workshops are designed to help you learn, practice and embed new knowledge, preparing you to shape your career and change the world.']' is present.
+11/02/2022 08:24:16 AM root INFO:Element '//span[text()='Academy Xi’s expert-led courses and workshops are designed to help you learn, practice and embed new knowledge, preparing you to shape your career and change the world.']' is present.
+11/02/2022 08:24:16 AM root INFO:Verifying element '//div[@data-name-courses= 'Data Analytics Pro']' is present.
+11/02/2022 08:24:16 AM root INFO:Element '//div[@data-name-courses= 'Data Analytics Pro']' is present.

@@ -6,7 +6,7 @@ class LogGen:
     def loggen():
         for handler in logging.root.handlers[:]:
             logging.root.removeHandler(handler)
-        logging.basicConfig(filename=".\\Logs\\app.log",
+        logging.basicConfig(filename="./Logs/app.log",
                             format='%(asctime)s %(name)s %(levelname)s:%(message)s',
                             datefmt='%m/%d/%Y %I:%M:%S %p',
                             filemode="w",
