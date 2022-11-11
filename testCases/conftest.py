@@ -17,7 +17,7 @@ def setup(request):
     options.headless = True
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
-    options.add_argument("--window-size=1400,600")
+    options.add_argument("--window-size=1920,1200")
     options.add_argument("--start-maximized")
     options.add_argument("--user-agent=Chrome/77")
     options.add_argument("--disable-dev-shm-usage")
@@ -35,8 +35,8 @@ def setup(request):
     #driver = webdriver.Chrome(executable_path="/var/lib/jenkins/axi_website_tests/chromedriver", options=options, desired_capabilities=capabilities)
     driver.maximize_window()
     request.cls.driver = driver
-    # yield driver
-    # driver.quit()
+    yield driver
+    driver.quit()
 
 
 def pytest_addoption(parser):  # This will get the value from CLI /hooks
@@ -77,7 +77,6 @@ def pytest_runtest_makereport(item):
             report_directory = os.path.dirname(item.config.option.htmlpath)
             file_name = report.nodeid.replace("::", "_") + ".png"
             destinationFile = os.path.join(report_directory, file_name)
-            # destinationFile = os.path.join("Screenshots", "main.png")
             driver.save_screenshot(destinationFile)
             if file_name:
                 html = '<div><img src="%s" alt="screenshot" style="width:350px;height:228px;" ' \
