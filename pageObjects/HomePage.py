@@ -10,8 +10,8 @@ from wrapper.elementfinder import ElementByLocator
 
 
 class HomePage(BasePage):
-
-    enroll_a_course_button_xpath = "//span[text()='Enrol in a course' and contains(@class,'text-empty')]"
+    enroll_a_course_button_xpath = "//div[@data-element_type='widget'][4]//span[text()='Enrol in a course' and contains(@class,'text-empty')]"
+    enroll_a_course_button_uat_xpath = "//span[text()='Enrol in a course' and contains(@class,'text-empty')]"
     enroll_first_course = "//a[@data-courseid='2463']"
     close_chat_box_button_css_selector = "//button[@aria-label='Minimize window']"
     download_iframe= "//iframe[contains(@src, 'is_show_course_price=1')]"
@@ -42,8 +42,11 @@ class HomePage(BasePage):
         self.element_by_finder = ElementByLocator()
 
     def click_enroll_a_course_button(self):
-        self.wait_element_presence(self.enroll_a_course_button_xpath)
-        self.click_element_by_js(self.enroll_a_course_button_xpath)
+        url = self.get_location()
+        if "uat" not in url:
+            self.click_element_by_js(self.enroll_a_course_button_xpath)
+        elif "uat" in url:
+            self.click_element_by_js(self.enroll_a_course_button_uat_xpath)
 
     def click_enroll_first_course(self):
         self.wait_element_presence(self.enroll_first_course)
@@ -86,15 +89,24 @@ class HomePage(BasePage):
         self.verify_css_property(self.software_engineer_transform_course_xpath, property, expected_value)
 
     def verify_presence_of_ctas_on_home_page(self):
-        self.element_should_be_present(self.enroll_a_course_button_xpath)
+        url = self.get_location()
+        if "uat" not in url:
+            self.element_should_be_present(self.enroll_a_course_button_xpath)
+        elif "uat" in url:
+            self.element_should_be_present(self.enroll_a_course_button_uat_xpath)
         self.element_should_be_present(self.a_with_text.format("Courses for individuals"))
         self.element_should_be_present(self.a_with_text.format("Training for teams"))
         self.element_should_be_present(self.a_with_text.format("Talent & recruitment "))
 
     def verify_color_of_ctas_on_home_page(self):
         time.sleep(3)
-        self.verify_css_property(self.enroll_a_course_button_xpath, "background-color", "rgba(0, 0, 0, 0)")
-        self.verify_css_property(self.enroll_a_course_button_xpath, "color", "rgba(255, 255, 255, 1)")
+        url = self.get_location()
+        if "uat" not in url:
+            self.verify_css_property(self.enroll_a_course_button_xpath, "background-color", "rgba(0, 0, 0, 0)")
+            self.verify_css_property(self.enroll_a_course_button_xpath, "color", "rgba(255, 255, 255, 1)")
+        elif "uat" in url:
+            self.verify_css_property(self.enroll_a_course_button_uat_xpath, "background-color", "rgba(0, 0, 0, 0)")
+            self.verify_css_property(self.enroll_a_course_button_uat_xpath, "color", "rgba(255, 255, 255, 1)")
         self.verify_css_property(self.a_with_text.format("Courses for individuals"), "background-color", "rgba(0, 0, 0, 0)")
         self.verify_css_property(self.a_with_text.format("Courses for individuals"), "color", "rgba(18, 30, 77, 1)")
         self.verify_css_property(self.a_with_text.format("Training for teams"), "background-color", "rgba(0, 0, 0, 0)")
