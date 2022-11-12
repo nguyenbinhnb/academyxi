@@ -35,6 +35,6 @@ class Test_001_Demo:
         self.thankYouPage = ThankYouPage(self.driver)
         self.basePage.verify_user_redirect_to_correct_location('https://academyxi.com/online-courses/customer-experience/course-guide/thank-you/')
         self.thankYouPage.verify_course_guide_pdf_files()
-        self.driver.close()
+
 
 
