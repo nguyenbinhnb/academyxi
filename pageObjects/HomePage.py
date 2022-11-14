@@ -12,7 +12,7 @@ from wrapper.elementfinder import ElementByLocator
 class HomePage(BasePage):
     enroll_a_course_button_xpath = "//div[@data-element_type='widget'][4]//span[text()='Enrol in a course' and contains(@class,'text-empty')]"
     enroll_a_course_button_uat_xpath = "//span[text()='Enrol in a course' and contains(@class,'text-empty')]"
-    enroll_first_course = "//a[@data-courseid='2463']"
+    enroll_first_course = "(//a[contains(@class, 'btn-enrol')])[1]"
     close_chat_box_button_css_selector = "//button[@aria-label='Minimize window']"
     download_iframe= "//iframe[contains(@src, 'is_show_course_price=1')]"
     a_with_text = "//a[text()='{}']"
@@ -49,7 +49,6 @@ class HomePage(BasePage):
             self.click_element_by_js(self.enroll_a_course_button_uat_xpath)
 
     def click_enroll_first_course(self):
-        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         self.wait_element_presence(self.enroll_first_course)
         self.click_element(self.enroll_first_course)
 
