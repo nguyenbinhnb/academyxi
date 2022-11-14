@@ -49,6 +49,7 @@ class HomePage(BasePage):
             self.click_element_by_js(self.enroll_a_course_button_uat_xpath)
 
     def click_enroll_first_course(self):
+        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         self.wait_element_presence(self.enroll_first_course)
         self.click_element(self.enroll_first_course)
 
