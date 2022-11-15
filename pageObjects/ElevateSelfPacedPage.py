@@ -24,7 +24,7 @@ class ElevateSelfPacedPage(BasePage):
         self.scroll_into_locator(self.a_with_text.format(obj['accordion'][0]["module"]))
         self.logger.info("Verify accordions are displayed")
         for i in range(len(obj['accordion'])):
-            self.click_element(self.expand_collapse_icon.format(obj['accordion'][i]["module"]))
+            self.click_element_by_js(self.expand_collapse_icon.format(obj['accordion'][i]["module"]))
             self.element_should_be_present(self.a_with_text.format(obj['accordion'][i]["module"]))
             self.element_should_be_present(self.p_span_contains_text.format(obj['accordion'][i]["title"]))
             self.element_should_be_present(self.li_span_contains_text.format(obj['accordion'][i]["item1"]))
