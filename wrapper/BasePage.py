@@ -7,6 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 from packaging.requirements import URL
 from selenium.common import TimeoutException, WebDriverException
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -281,6 +282,11 @@ class BasePage:
         if not present:
             raise AssertionError()
         return self
+
+    def double_click(self, locator):
+        element = self.driver.find_element(By.XPATH, locator)
+        action = ActionChains(self.driver)
+        action.double_click(element).perform()
 
 
 

@@ -35,6 +35,7 @@ class HomePage(BasePage):
     p_contains_class = "//p[contains(@class, '{}')]//select"
     options_in_dropdown = "//p[contains(@class, '{}')]//option[text()='{}']"
     captcha_checkbox = "//p[@class='form-field  Show_Course_Price pd-hidden  hidden   ']//following-sibling::div//iframe[@title='reCAPTCHA']"
+    mega_menu_button = "//a[contains(@class, 'mega-menu-link') and @href='{}']"
 
 
     def __init__(self, driver):
@@ -118,6 +119,12 @@ class HomePage(BasePage):
         self.verify_working_link(self.a_with_text.format("Courses for individuals"))
         self.verify_working_link(self.a_with_text.format("Training for teams"))
         self.verify_working_link(self.a_with_text.format("Courses for individuals"))
+
+    def click_view_all_courses(self, locator):
+        self.wait_for_page_load()
+        self.wait_element_presence(self.mega_menu_button.format(locator))
+        self.double_click(self.mega_menu_button.format(locator))
+
 
 
 
