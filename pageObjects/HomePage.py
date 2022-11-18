@@ -122,7 +122,6 @@ class HomePage(BasePage):
 
     def click_view_all_courses(self, locator):
         self.wait_for_page_load()
-        self.wait_element_presence(self.mega_menu_button.format(locator))
         self.double_click(self.mega_menu_button.format(locator))
 
 

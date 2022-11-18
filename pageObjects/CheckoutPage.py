@@ -23,7 +23,7 @@ class CheckoutPage(BasePage):
     dob_month_id = "billing_month_field"
     dob_year_css_selector = "span[aria-labelledby*='select2-billing_year-container']"
     input_textbox_class_name = "select2-search__field"
-    h2_text_xpath = "//h2[text()='{}']"
+    h2_with_text = "//h2[text()='{}']"
     li_text_xpath = "//li[text()='{}']"
     next_button = "//input[@id= 'continue']"
     chat_box_iframe = "//iframe[@id='chat-widget']"
@@ -37,6 +37,10 @@ class CheckoutPage(BasePage):
     p_with_text = "//p[text()='{}']"
     td_with_text = "//td[text()='{}']"
     price = "(//td//span[contains(@class,'woocommerce-Price-amount')])[{}]"
+    card_name = "//input[@id='stripe-card-name']"
+    card_number = "//input[@id='stripe-card-number']"
+    expiry = "//input[@id='stripe-card-expiry']"
+    card_code = "//input[@id='stripe-card-cvc']"
 
     def __init__(self, driver):
         self.driver = driver
@@ -140,3 +144,24 @@ class CheckoutPage(BasePage):
         self.element_should_be_present(self.price.format('1'))
         self.element_should_be_present(self.price.format('2'))
         self.element_should_be_present(self.price.format('3'))
+
+    def fill_in_details_for_payment_and_submit(self):
+        self.input_text(self.card_name, "Test")
+        self.input_text(self.card_number, "4242")
+        WebDriverWait(self.driver, 20).until(
+            EC.visibility_of_element_located((By.XPATH, self.card_number))).send_keys("4242")
+        WebDriverWait(self.driver, 20).until(
+            EC.visibility_of_element_located((By.XPATH, self.card_number))).send_keys("4242")
+        WebDriverWait(self.driver, 20).until(
+            EC.visibility_of_element_located((By.XPATH, self.card_number))).send_keys("4242")
+        self.input_text(self.expiry, "09")
+        WebDriverWait(self.driver, 20).until(
+            EC.visibility_of_element_located((By.XPATH, self.expiry))).send_keys("25")
+        self.input_text(self.card_code, "123")
+        self.click_element_by_js(self.a_with_class.format("btn-confirm"))
+
+    def verify_that_enrolment_is_confirmed(self):
+        self.wait_for_page_load()
+        self.element_should_be_visible(self.h2_with_text.format("Your enrolment is confirmed"), "Element is not present")
+
+

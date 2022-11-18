@@ -285,8 +285,7 @@ class BasePage:
 
     def double_click(self, locator):
         element = self.driver.find_element(By.XPATH, locator)
-        action = ActionChains(self.driver)
-        action.double_click(element).perform()
+        ActionChains(self.driver).double_click(element).perform()
 
 
 
