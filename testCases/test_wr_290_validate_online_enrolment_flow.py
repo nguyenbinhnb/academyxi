@@ -21,7 +21,7 @@ class Test_001_validate_online_enrolment_flow:
     logger = LogGen.loggen()
 
     @pytest.mark.sanity
-    @pytest.mark.regression
+    # @pytest.mark.regression
     @pytest.mark.smoke
     def test_001_validate_online_enrolment_flow(self):
         self.logger.info("Test_001_validate_online_enrolment_flow")
