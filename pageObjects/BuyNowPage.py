@@ -5,8 +5,8 @@ from wrapper.elementfinder import ElementByLocator
 
 class BuyNowPage(BasePage):
 
-    download_course_guide_button = "//div[@class='item item-page1'][1]//a[text()='Download course guide']"
-    enrol_now_button = "//div[@class='item item-page1'][1]//a[text()='Enrol now']"
+    download_course_guide_button = "(//div[@class='wrapper-button'])[1]//a[text()='Download course guide']"
+    enrol_now_button = "(//div[@class='wrapper-button'])[1]//a[text()='Enrol now']"
 
     def __init__(self,driver):
         self.driver=driver

@@ -106,6 +106,7 @@ class BasePage:
         return self
 
     def verify_course_item_should_be_displayed(self, course):
+        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         self.element_should_be_visible(self.course_name_xpath.format(course), "Course is not present")
         return self
 

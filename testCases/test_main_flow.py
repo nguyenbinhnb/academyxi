@@ -15,7 +15,7 @@ class Test_001_Demo:
     baseURL = ReadConfig.getApplicationURL("baseURL")
 
     @pytest.mark.sanity
-    @pytest.mark.regression
+    # @pytest.mark.regression
     @pytest.mark.smoke
     def test_001_download_course_guide(self):
         self.logger.info("Test_001_main_flow")
