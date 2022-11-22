@@ -215,14 +215,12 @@ class BasePage:
             for link in working_link_list:
                 time.sleep(2)
                 response = requests.get(link.get_attribute('href'), stream=True)
-                print(link.get_attribute('href'))
                 response_code = response.status_code
                 response_code_list.append(response_code)
                 if response_code == 200:
                     self.logger.info(link.get_attribute('href') + " is not broken")
                 else:
                     self.logger.info(link.get_attribute('href') + " is broken")
-            print(response_code_list)
             assert 404 not in response_code_list
         except requests.exceptions.MissingSchema:
             print("Encountered MissingSchema Exception")
