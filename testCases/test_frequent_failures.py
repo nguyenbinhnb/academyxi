@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium.webdriver import ActionChains
 
@@ -42,6 +44,7 @@ class Test_001_Frequent_Failures:
 
     @pytest.hookimpl(hookwrapper=True)
     @pytest.mark.smoke
+    # @pytest.mark.regression
     def test_003_frequent_failures_on_online_courses_page(self):
         self.logger.info("Test_003_frequent_failures_on_online_courses_page")
         self.logger.info("Started Go To Online Courses page")

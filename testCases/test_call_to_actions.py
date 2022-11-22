@@ -19,6 +19,7 @@ class Test_001_Call_To_Actions:
     baseURL = ReadConfig.getApplicationURL("baseURL")
 
     @pytest.mark.smoke
+    # @pytest.mark.regression
     def test_001_call_to_actions_on_home_page(self):
         self.logger.info("Test_001_call_to_actions_on_home_page")
         self.logger.info("Started Go To Home page")
@@ -44,12 +45,14 @@ class Test_001_Call_To_Actions:
         self.onlineCoursesPage.verify_working_link_of_ctas_on_online_courses_page()
 
     @pytest.mark.smoke
+    # @pytest.mark.regression
     def test_003_call_to_actions_on_buy_now_page(self):
         self.logger.info("Test_001_call_to_actions_on_buy_now_page")
         self.logger.info("Started Go To Buy Now Page")
         self.driver.get("https://academyxi.com/buy-now/")
         self.buyNowPage = BuyNowPage(self.driver)
         ActionChains(self.driver).move_by_offset(20, 20).click().perform()
+        time.sleep(3)
         self.buyNowPage.verify_presence_of_ctas_on_buy_now_page()
         self.buyNowPage.verify_color_of_ctas_on_buy_now_page()
         self.buyNowPage.verify_working_link_of_ctas_on_buy_now_page()
