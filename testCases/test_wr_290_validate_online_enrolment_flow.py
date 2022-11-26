@@ -33,11 +33,11 @@ class Test_001_validate_online_enrolment_flow():
         self.onlineCoursesNewPage = OnlineCoursesNewPage(self.driver)
         self.onlineCoursesNewPage.click_learn_more_button("/online-courses/software-engineering-new/")
         self.basePage.wait_for_page_load()
-        time.sleep(5)
+        time.sleep(3)
         self.uxuiDesignNewPage = UXUIDesignNewPage(self.driver)
         self.uxuiDesignNewPage.click_enrol_now_button("2")
         self.basePage.wait_for_page_load()
-        time.sleep(5)
+        time.sleep(3)
         self.checkoutPage = CheckoutPage(self.driver)
         self.checkoutPage.fill_in_details_for_checkout()
         self.checkoutPage.verify_payment_options()
@@ -46,6 +46,7 @@ class Test_001_validate_online_enrolment_flow():
         self.checkoutPage.fill_in_details_for_payment_and_submit()
         self.basePage.wait_for_page_load()
         self.checkoutPage.verify_that_enrolment_is_confirmed()
+        self.basePage.verify_broken_images()
 
 
 

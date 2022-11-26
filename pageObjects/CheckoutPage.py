@@ -163,6 +163,7 @@ class CheckoutPage(BasePage):
         self.click_element_by_js(self.a_with_class.format("btn-confirm"))
 
     def verify_that_enrolment_is_confirmed(self):
+        self.wait_element_presence("//p[contains(text(),'Application number')]")
         self.element_should_be_present(self.h2_with_text.format("Your enrolment is confirmed"))
 
 

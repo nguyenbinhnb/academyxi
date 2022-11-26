@@ -183,7 +183,7 @@ class BasePage:
             print("Encountered InvalidSchema Exception")
 
     def wait_element_presence(self, locator):
-        WebDriverWait(self.driver, 60).until(EC.element_to_be_clickable((By.XPATH, locator)))
+        WebDriverWait(self.driver, 60).until(EC.presence_of_element_located((By.XPATH, locator)))
         return self
 
     def switch_to_iframe(self, locator, timeout=60):
@@ -235,7 +235,8 @@ class BasePage:
     def scroll_down_to_top(self):
         self.driver.execute_script("window.scrollTo(0, -(document.body.scrollHeight));")
 
-    def verify_broken_images(self, url):
+    def verify_broken_images(self):
+        url = self.get_location()
         global img
         html = urlopen(url)
         bs = BeautifulSoup(html, 'html.parser')
@@ -257,8 +258,10 @@ class BasePage:
             print("Encountered MissingSchema Exception")
         except requests.exceptions.InvalidSchema:
             print("Encountered InvalidSchema Exception")
+        except requests.exceptions.ConnectTimeout:
+            print("Encountered Connect Timeout")
 
-    def verify_broken_images_failed(self, url):
+    def verify_broken_images_with_url(self, url):
         global img
         html = urlopen(url)
         bs = BeautifulSoup(html, 'html.parser')
@@ -267,11 +270,11 @@ class BasePage:
         try:
             for img in imgs:
                 if img.get('src').endswith(('.jpg', '.png', '.webp', 'svg')):
-                    response = requests.get("https://the-internet.herokuapp.com"+img.get('src'), stream=True)
+                    response = requests.get(img.get('src'), stream=True)
                     response_code = response.status_code
                     if (response_code == 200):
-                       self.logger.info(img.get('src') + " is not broken")
-                       response_code_list.append(response_code)
+                        self.logger.info(img.get('src') + " is not broken")
+                        response_code_list.append(response_code)
                     else:
                         self.logger.info(img.get('src') + " is broken")
                         response_code_list.append(response_code)
