@@ -1,0 +1,29 @@
+{ "ga_and_gtm":[
+  {
+    "script": "https://pi.pardot.com/pd.js"
+  },
+  {
+    "script": "https://www.googletagmanager.com/gtm.js?id=GTM-TW5MRQC"
+  },
+  {
+    "script": "//www.gstatic.com/call-tracking/call-tracking_7.js"
+  },
+  {
+    "script": "https://www.googletagmanager.com/gtag/js?id=G-F4CMRNTHS2&l=dataLayer&cx=c"
+  },
+  {
+    "script": "https://www.gstatic.com/wcm/loader.js"
+  },
+  {
+    "script": "https://www.google-analytics.com/analytics.js"
+  },
+  {
+    "script": "https://www.googleoptimize.com/optimize.js?id=OPT-KXBKMG9"
+  },
+  {
+    "script": "https://www.googletagmanager.com/gtag/js?id=GTM-TW5MRQC&l=dataLayer"
+  }
+  ]
+}
+
+

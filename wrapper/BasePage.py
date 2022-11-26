@@ -1,3 +1,4 @@
+import json
 import os
 import time
 from telnetlib import EC
@@ -21,8 +22,10 @@ class BasePage:
     col_soft_validation_lect_failed_data = []
     logger = LogGen.loggen()
     tag_with_text_xpath = "//{}[text()='{}']"
-    course_name_xpath ="//div[@data-name-courses= '{}']"
+    course_info_xpath ="//div[@class='course-info']"
     div_contains_class_xpath ="//div[contains(@class, 'pagination-content')]"
+    script_with_src = "//script[@src='{}']"
+    loading_icon_xpath = "//div[@class='loading active']"
 
 
     def __init__(self, driver):
@@ -81,7 +84,7 @@ class BasePage:
             return False
         except TimeoutException:
             self.driver.save_screenshot("./Screenshots/" + f".test_elementDisplay_{num}.png")
-            self.logger.warning("Fail to locate Element: {} in {} sec.".format(locator, 20))
+            self.logger.warning("Fail to locate Element: {} in {} sec.".format(locator, 30))
             return False
         except WebDriverException as e:
             self.driver.save_screenshot("./Screenshots/" + f".test_elementDisplay_{num}.png")
@@ -105,9 +108,9 @@ class BasePage:
         self.element_should_be_visible(self.tag_with_text_xpath.format(tag, text), "Element is not present")
         return self
 
-    def verify_course_item_should_be_displayed(self, course):
+    def verify_course_item_should_be_displayed(self):
         ActionChains(self.driver).move_by_offset(20, 20).click().perform()
-        self.element_should_be_visible(self.course_name_xpath.format(course), "Course is not present")
+        self.element_should_be_visible(self.course_info_xpath, "Course Info is not present")
         return self
 
     def get_location(self):
@@ -118,7 +121,6 @@ class BasePage:
 
     def verify_user_redirect_to_correct_location(self, url):
         self.logger.info("Verify user redirect to correct location")
-        time.sleep(20)
         txt_link = self.get_location()
         self.assert_two_values_equal(txt_link, url, 'yes')
 
@@ -195,6 +197,7 @@ class BasePage:
             return True
         else:
             print("element is not present")
+            self.logger.info(element)
             self.logger.info("Element {} is not present.".format(locator))
             return False
 
@@ -287,6 +290,25 @@ class BasePage:
     def double_click(self, locator):
         element = self.driver.find_element(By.XPATH, locator)
         ActionChains(self.driver).double_click(element).perform()
+
+    def verify_ga_and_gtm_are_present(self):
+        file = open("TestData/ga_and_gtm.json", "r")
+        data = file.read()
+        file.close()
+        obj = json.loads(data)
+        self.logger.info("Verify ga and gtm are present")
+        for i in range(len(obj['ga_and_gtm'])):
+            self.element_should_be_present(self.script_with_src.format(obj['ga_and_gtm'][i]["script"]))
+
+    def wait_for_loading_icon_disappear(self):
+        try:
+            WebDriverWait(self.driver, 5
+                          ).until(EC.presence_of_element_located((By.XPATH, self.loading_icon_xpath)))
+            WebDriverWait(self.driver, 30
+                          ).until_not(EC.presence_of_element_located((By.XPATH, self.loading_icon_xpath)))
+        except TimeoutException:
+            pass
+
 
 
 

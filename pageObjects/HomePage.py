@@ -10,11 +10,11 @@ from wrapper.elementfinder import ElementByLocator
 
 
 class HomePage(BasePage):
-    enroll_a_course_button_xpath = "//div[@data-element_type='widget'][4]//span[text()='Enrol in a course' and contains(@class,'text-empty')]"
+    enroll_a_course_button_xpath = "//div[@data-element_type='widget'][5]//span[text()='Enrol in a course' and contains(@class,'text-empty')]"
     enroll_a_course_button_uat_xpath = "//span[text()='Enrol in a course' and contains(@class,'text-empty')]"
     enroll_first_course = "(//div[@class='right-content'])[1]//a[contains(@class, 'btn-enrol')]"
     close_chat_box_button_css_selector = "//button[@aria-label='Minimize window']"
-    download_iframe= "//iframe[contains(@src, 'is_show_course_price=1')]"
+    download_iframe= "//iframe[contains(@src, 'is_show_course_price')]"
     a_with_text = "//a[text()='{}']"
     enroll_course_xpath = "//div[@data-name-courses='{}']/div[@class='right-content']//a[text()='Enrol now']"
     download_course_guide_xpath = "//div[@data-name-courses='Customer Experience']/div[@class='right-content']//a[text()='Download course guide']"
@@ -50,11 +50,10 @@ class HomePage(BasePage):
             self.click_element_by_js(self.enroll_a_course_button_uat_xpath)
 
     def click_enroll_first_course(self):
-        self.click_element_by_js(self.enroll_first_course)
+        self.double_click(self.enroll_first_course)
 
     def click_page_number(self, num):
-        self.wait_element_presence(self.a_with_text.format(num))
-        self.click_element_by_js(self.a_with_text.format(num))
+        self.double_click(self.a_with_text.format(num))
 
     def enroll_a_specific_course(self, name):
         self.driver.execute_script("window.scrollTo(0, -(document.body.scrollHeight));")
@@ -63,9 +62,7 @@ class HomePage(BasePage):
         self.click_element_by_js(self.enroll_course_xpath.format(name))
 
     def download_course_guide(self, firstname, lastname, phone, email, discipline, reason):
-        self.scroll_into_locator("//a[text()='3']")
-        self.wait_for_page_load()
-        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
+        self.scroll_into_locator(self.h2_with_text.format("Download your free course guide"))
         self.switch_to_iframe(self.download_iframe)
         self.input_text(self.firstname_xpath, firstname)
         self.input_text(self.lastname_xpath, lastname)
@@ -76,13 +73,16 @@ class HomePage(BasePage):
         self.click_element(self.options_in_dropdown.format('Study_Motivation', reason))
         self.input_text(self.email_xpath, email)
         self.click_element_by_js(self.i_am_over_18_xpath)
-        self.wait_for_page_load()
-        time.sleep(30)
+        time.sleep(3)
         if self.is_visible(self.captcha_checkbox):
             self.click_element(self.captcha_checkbox)
-            time.sleep(30)
-        self.click_element(self.download_button_xpath)
-        time.sleep(30)
+            time.sleep(3)
+        self.click_element_by_js(self.download_button_xpath)
+        self.wait_for_loading_icon_disappear()
+        time.sleep(3)
+        if self.is_visible(self.download_button_xpath):
+            self.double_click(self.download_button_xpath)
+            self.wait_for_loading_icon_disappear()
 
 
     def verify_locator_css_value(self, property, expected_value):
@@ -122,6 +122,9 @@ class HomePage(BasePage):
     def click_view_all_courses(self, locator):
         self.wait_for_page_load()
         self.double_click(self.mega_menu_button.format(locator))
+
+    def verify_ga_and_gtm_are_present_on_home_page(self):
+        self.element_should_be_present()
 
 
 

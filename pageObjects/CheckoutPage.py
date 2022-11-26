@@ -41,6 +41,7 @@ class CheckoutPage(BasePage):
     card_number = "//input[@id='stripe-card-number']"
     expiry = "//input[@id='stripe-card-expiry']"
     card_code = "//input[@id='stripe-card-cvc']"
+    title = "//p[@id='billing_title_field']"
 
     def __init__(self, driver):
         self.driver = driver
@@ -103,6 +104,7 @@ class CheckoutPage(BasePage):
             EC.visibility_of_element_located((By.XPATH, self.li_text_xpath.format(year)))).click()
 
     def fill_in_details_for_checkout(self):
+        self.scroll_into_locator(self.title)
         self.set_first_name('Sandbox')
         self.set_last_name("Axi Testing")
         self.set_street_address("123 hanoi")
@@ -161,7 +163,6 @@ class CheckoutPage(BasePage):
         self.click_element_by_js(self.a_with_class.format("btn-confirm"))
 
     def verify_that_enrolment_is_confirmed(self):
-        self.wait_for_page_load()
-        self.element_should_be_visible(self.h2_with_text.format("Your enrolment is confirmed"), "Element is not present")
+        self.element_should_be_present(self.h2_with_text.format("Your enrolment is confirmed"))
 
 

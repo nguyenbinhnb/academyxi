@@ -13,6 +13,7 @@ class UXUIDesignNewPage(BasePage):
 
     def click_enrol_now_button(self, num):
         self.double_click(self.enrol_button.format(num))
+        time.sleep(5)
         if self.is_present(self.enrol_button.format(num)):
            self.double_click(self.enrol_button.format(num))
 
