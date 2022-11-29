@@ -17,7 +17,7 @@ class Test_001_Demo:
     logger = LogGen.loggen()
 
     @pytest.mark.sanity
-    # @pytest.mark.regression
+
     @pytest.mark.smoke
     def test_001_enroll_course(self):
         self.logger.info("Test_001_enroll_course")
@@ -26,10 +26,10 @@ class Test_001_Demo:
         self.homePage = HomePage(self.driver)
         self.basePage = BasePage(self.driver)
         self.homePage.click_enroll_a_course_button()
-        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
         time.sleep(20)
         self.homePage.click_enroll_first_course()
-        time.sleep(20)
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
         self.basePage.verify_text_element_should_be_displayed('h2', 'Enrol With Us')
         self.checkoutPage = CheckoutPage(self.driver)
         self.checkoutPage.set_first_name('Sandbox')

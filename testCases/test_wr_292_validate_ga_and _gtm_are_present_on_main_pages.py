@@ -24,8 +24,8 @@ class TestValidateGaAndGtmArePresentOnMainPages:
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         time.sleep(2)
-        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
-        self.basePage.move_to_element("//h1[contains(@class,'elementor-heading-title')]", "(//h2[contains(@class,'elementor-heading-title')])[1]")
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
         self.basePage.verify_ga_and_gtm_are_present()
 
     # @pytest.mark.regression
@@ -36,8 +36,8 @@ class TestValidateGaAndGtmArePresentOnMainPages:
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         time.sleep(2)
-        ActionChains(self.driver).move_by_offset(10, 10).click().perform()
-        self.basePage.move_to_element("//h2[@class='title']", "(//div[contains(@class,'content-top')])[1]")
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
         self.basePage.verify_ga_and_gtm_are_present()
 
     # @pytest.mark.regression
@@ -48,8 +48,8 @@ class TestValidateGaAndGtmArePresentOnMainPages:
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         time.sleep(2)
-        ActionChains(self.driver).move_by_offset(10, 10).click().perform()
-        self.basePage.move_to_element("//h2[@class='title']", "(//h2[contains(@class,'elementor-heading-title')])[1]")
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
         self.basePage.verify_ga_and_gtm_are_present()
 
     # @pytest.mark.regression
@@ -60,8 +60,8 @@ class TestValidateGaAndGtmArePresentOnMainPages:
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         time.sleep(2)
-        ActionChains(self.driver).move_by_offset(10, 10).click().perform()
-        self.basePage.move_to_element("//h1[@class='banner-title']", "(//h2[contains(@class,'elementor-heading-title')])[1]")
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
         self.basePage.verify_ga_and_gtm_are_present()
 
     # @pytest.mark.regression
@@ -72,6 +72,6 @@ class TestValidateGaAndGtmArePresentOnMainPages:
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         time.sleep(2)
-        ActionChains(self.driver).move_by_offset(10, 10).click().perform()
-        self.basePage.move_to_element("//h1[@class='title']",  "(//h2[contains(@class,'elementor-heading-title')])[1]")
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
         self.basePage.verify_ga_and_gtm_are_present()
