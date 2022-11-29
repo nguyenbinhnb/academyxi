@@ -39,6 +39,8 @@ class Test_001_Frequent_Failures:
         self.logger.info("Test_002_frequent_failures_on_blog_page")
         self.logger.info("Started Go To Blog page")
         self.driver.get(self.baseURL+"blogs/")
+        self.basePage = BasePage(self.driver)
+        self.basePage.wait_for_page_load()
         self.blogPage = BlogPage(self.driver)
         self.blogPage.verify_articles_amount()
 
@@ -48,8 +50,8 @@ class Test_001_Frequent_Failures:
         self.logger.info("Test_003_frequent_failures_on_online_courses_page")
         self.logger.info("Started Go To Online Courses page")
         self.driver.get(self.onlineCoursesPageURL)
-        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         self.basePage = BasePage(self.driver)
+        self.basePage.wait_for_page_load()
         self.basePage.verify_broken_images()
 
     @pytest.mark.smoke
@@ -59,9 +61,11 @@ class Test_001_Frequent_Failures:
         self.logger.info("Verify broken images on Online Courses page")
         self.basePage = BasePage(self.driver)
         self.driver.get(self.baseURL+"online-courses/customer-experience/")
+        self.basePage.wait_for_page_load()
         self.basePage.verify_broken_images()
         self.logger.info("Verify broken images on Customer Experience: Elevate (Self-paced) page")
         self.driver.get(self.baseURL+"online-courses/customer-experience/elevate-self-paced/")
+        self.basePage.wait_for_page_load()
         self.basePage.verify_broken_images()
 
     @pytest.mark.smoke
@@ -69,6 +73,7 @@ class Test_001_Frequent_Failures:
     def test_005_frequent_failures_on_buy_now_page(self):
         self.basePage = BasePage(self.driver)
         self.driver.get(self.baseURL+"buy-now/")
+        self.basePage.wait_for_page_load()
         self.basePage.verify_broken_images()
 
     @pytest.mark.smoke
@@ -78,12 +83,15 @@ class Test_001_Frequent_Failures:
         self.basePage = BasePage(self.driver)
         self.logger.info("Verify broken images on Software Engineering Online Landing page")
         self.driver.get(self.baseURL+"lp/software-engineering-online/")
+        self.basePage.wait_for_page_load()
+        time.sleep(5)
+        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         self.basePage.verify_broken_images()
         self.logger.info("Verify broken images on UX UI Online Landing page")
         self.driver.get(self.baseURL+"lp/ux-ui-online/")
+        self.basePage.wait_for_page_load()
         self.basePage.verify_broken_images()
 
-    @pytest.hookimpl(hookwrapper=True)
     @pytest.mark.smoke
     # @pytest.mark.regression
     def test_007_frequent_failures_on_elevate_self_paced_page(self):
@@ -91,5 +99,9 @@ class Test_001_Frequent_Failures:
         self.basePage = BasePage(self.driver)
         self.logger.info("Verify broken images on Elevate Self Paced page")
         self.driver.get(self.baseURL+"online-courses/customer-experience/elevate-self-paced/")
+        self.basePage.wait_for_page_load()
+        time.sleep(5)
+        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         self.elevateSelfPacedPage = ElevateSelfPacedPage(self.driver)
-        self.elevateSelfPacedPage.verify_accordions()
+        ActionChains(self.driver).move_by_offset(20, 20).release().perform()
+        self.elevateSelfPacedPage.verify_accordions_2()

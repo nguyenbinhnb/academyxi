@@ -36,7 +36,7 @@ class Test_001_Demo:
         self.checkoutPage.set_last_name('Axi Testing')
         self.checkoutPage.set_street_address('hanoi 123')
         self.checkoutPage.set_phone('0355665555')
-        self.checkoutPage.set_email_address('test@gmail.com')
+        self.checkoutPage.set_email_address('binh.n@academyxi.com')
         self.checkoutPage.set_date('11')
         self.checkoutPage.close_chat_box()
         self.checkoutPage.set_month('12')

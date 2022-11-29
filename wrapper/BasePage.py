@@ -7,7 +7,7 @@ from urllib.request import urlopen
 import requests
 from bs4 import BeautifulSoup
 from packaging.requirements import URL
-from selenium.common import TimeoutException, WebDriverException
+from selenium.common import TimeoutException, WebDriverException, StaleElementReferenceException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -103,8 +103,6 @@ class BasePage:
         return self
 
     def verify_text_element_should_be_displayed(self, tag, text):
-        time.sleep(20)
-        self.wait_element_presence(self.tag_with_text_xpath.format(tag, text))
         self.element_should_be_visible(self.tag_with_text_xpath.format(tag, text), "Element is not present")
         return self
 
@@ -205,9 +203,7 @@ class BasePage:
         try:
             old_page = self.driver.find_element(By.XPATH, '//html')
             yield
-            WebDriverWait(self, timeout).until(
-                EC.staleness_of(old_page)
-            )
+            WebDriverWait(self, timeout).until(EC.staleness_of(old_page))
         except TimeoutException:
             self.logger.info("got timeout exception on wait for page load!!")
 
@@ -229,6 +225,8 @@ class BasePage:
             print("Encountered MissingSchema Exception")
         except requests.exceptions.InvalidSchema:
             print("Encountered InvalidSchema Exception")
+        except StaleElementReferenceException:
+            pass
     def scroll_down_to_bottom(self):
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
@@ -311,6 +309,13 @@ class BasePage:
                           ).until_not(EC.presence_of_element_located((By.XPATH, self.loading_icon_xpath)))
         except TimeoutException:
             pass
+
+    def move_to_element(self, element_1, element_2):
+        drag = self.driver.find_element(By.XPATH, element_1)
+        drop = self.driver.find_element(By.XPATH, element_2)
+        ActionChains(self.driver).drag_and_drop(drag, drop).perform()
+        time.sleep(2)
+        ActionChains(self.driver).move_by_offset(20, 20).move_to_element(drop).perform()
 
 
 

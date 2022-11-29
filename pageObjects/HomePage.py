@@ -50,6 +50,8 @@ class HomePage(BasePage):
             self.click_element_by_js(self.enroll_a_course_button_uat_xpath)
 
     def click_enroll_first_course(self):
+        locator = self.driver.find_element(By.XPATH, self.enroll_first_course)
+        ActionChains(self.driver).move_to_element(locator).perform()
         self.double_click(self.enroll_first_course)
 
     def click_page_number(self, num):

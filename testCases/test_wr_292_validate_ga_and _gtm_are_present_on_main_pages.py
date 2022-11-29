@@ -23,30 +23,33 @@ class TestValidateGaAndGtmArePresentOnMainPages:
         self.driver.get(self.baseURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
+        time.sleep(2)
         ActionChains(self.driver).move_by_offset(20, 20).click().perform()
-        time.sleep(30)
+        self.basePage.move_to_element("//h1[contains(@class,'elementor-heading-title')]", "(//h2[contains(@class,'elementor-heading-title')])[1]")
         self.basePage.verify_ga_and_gtm_are_present()
 
     # @pytest.mark.regression
     @pytest.mark.smoke
     def test_002_validate_ga_and_gtm_are_present_on_checkout_page(self):
         self.logger.info("Test_001_validate_ga_and_gtm_are_present_on_checkout_page")
-        self.driver.get(self.baseURL + "checkout/")
+        self.driver.get(self.baseURL+"checkout/")
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
-        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
-        time.sleep(30)
+        time.sleep(2)
+        ActionChains(self.driver).move_by_offset(10, 10).click().perform()
+        self.basePage.move_to_element("//h2[@class='title']", "(//div[contains(@class,'content-top')])[1]")
         self.basePage.verify_ga_and_gtm_are_present()
 
     # @pytest.mark.regression
     @pytest.mark.smoke
     def test_003_validate_ga_and_gtm_are_present_on_thank_you_page(self):
         self.logger.info("Test_001_validate_ga_and_gtm_are_present_on_thank_you_page")
-        self.driver.get(self.baseURL + "/online-courses/user-experience-design/course-guide/thank-you/")
+        self.driver.get(self.baseURL+"/online-courses/user-experience-design/course-guide/thank-you/")
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
-        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
-        time.sleep(3)
+        time.sleep(2)
+        ActionChains(self.driver).move_by_offset(10, 10).click().perform()
+        self.basePage.move_to_element("//h2[@class='title']", "(//h2[contains(@class,'elementor-heading-title')])[1]")
         self.basePage.verify_ga_and_gtm_are_present()
 
     # @pytest.mark.regression
@@ -56,17 +59,19 @@ class TestValidateGaAndGtmArePresentOnMainPages:
         self.driver.get(self.baseURL + "lp/software-engineering-online/")
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
-        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
-        time.sleep(30)
+        time.sleep(2)
+        ActionChains(self.driver).move_by_offset(10, 10).click().perform()
+        self.basePage.move_to_element("//h1[@class='banner-title']", "(//h2[contains(@class,'elementor-heading-title')])[1]")
         self.basePage.verify_ga_and_gtm_are_present()
 
     # @pytest.mark.regression
     @pytest.mark.smoke
     def test_005_validate_ga_and_gtm_are_present_on_course_page(self):
         self.logger.info("Test_001_validate_ga_and_gtm_are_present_on_course_page")
-        self.driver.get(self.baseURL + "online-courses/customer-experience/")
+        self.driver.get(self.baseURL+"online-courses/customer-experience/")
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
-        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
-        time.sleep(3)
+        time.sleep(2)
+        ActionChains(self.driver).move_by_offset(10, 10).click().perform()
+        self.basePage.move_to_element("//h1[@class='title']",  "(//h2[contains(@class,'elementor-heading-title')])[1]")
         self.basePage.verify_ga_and_gtm_are_present()

@@ -1,8 +1,5 @@
 { "ga_and_gtm":[
   {
-    "script": "https://pi.pardot.com/pd.js"
-  },
-  {
     "script": "https://www.googletagmanager.com/gtm.js?id=GTM-TW5MRQC"
   },
   {
