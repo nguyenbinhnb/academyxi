@@ -46,7 +46,7 @@ class ElevateSelfPacedPage(BasePage):
         module_list = self.driver.find_elements(By.XPATH, "//a[@class='panel-title']")
         for module in module_list:
             module_value = module.text
-            time.sleep(6)
+            time.sleep(3)
             self.click_element_by_js(self.panel_icon.format(module_value))
             if module_value != "":
                 self.logger.info("{} is present".format(module_value))

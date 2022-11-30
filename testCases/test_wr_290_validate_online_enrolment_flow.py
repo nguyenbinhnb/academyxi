@@ -53,8 +53,8 @@ class Test_001_validate_online_enrolment_flow():
         self.checkoutPage.verify_that_enrolment_is_confirmed()
         self.basePage.verify_broken_images()
 
-    # @pytest.mark.regression
     @pytest.mark.smoke
+    # @pytest.mark.regression
     def test_001_validate_online_enrolment_flow_on_prod(self):
             self.logger.info("Test_001_validate_online_enrolment_flow")
             self.logger.info("Started Enrol Course")
@@ -68,6 +68,7 @@ class Test_001_validate_online_enrolment_flow():
             self.onlineCoursesNewPage.click_learn_more_button("/online-courses/software-engineering-new/")
             self.basePage.wait_for_page_load()
             ActionChains(self.driver).move_by_offset(20, 20).click().perform()
+            ActionChains(self.driver).move_by_offset(5, 5).click().perform()
             self.uxuiDesignNewPage = UXUIDesignNewPage(self.driver)
             self.uxuiDesignNewPage.click_enrol_now_button("2")
             self.basePage.wait_for_page_load()
