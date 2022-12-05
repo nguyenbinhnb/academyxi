@@ -8,17 +8,24 @@ class ReadConfig:
     def getApplicationURL(link):
         if link == "baseURL":
            url=config.get('common info','baseURL')
-        elif link =="Online Courses Page":
-            url = config.get('common info', 'onlineCoursesURL')
+        elif link == "Online Courses Page":
+           url = config.get('common info', 'onlineCoursesURL')
+        elif link == "All Courses Listing Page":
+            url = config.get('common info', 'allCoursesListingURL')
+        elif link == "Customer Experience Discipline Page":
+            url = config.get('common info', 'customerExperienceDisciplineURL')
+        elif link == "Buy Now Page":
+            url = config.get('common info', 'buyNowURL')
+        elif link == "LP Software Engineer Online Page":
+            url = config.get('common info', 'lpSoftwareEngineerOnlineURL')
+        elif link == "LP UX UI Online Page":
+            url = config.get('common info', 'lpUXUIOnlineURL')
+        elif link == "CX Self Paced Elevate Page":
+            url = config.get('common info', 'cxSelfPacedElevateURL')
+        elif link == "XD Thank You Page":
+            url = config.get('common info', 'xdThankYouURL')
+        elif link == "Checkout Page":
+            url = config.get('common info', 'checkoutURL')
         return url
 
-    @staticmethod
-    def getUseremail():
-        username=config.get('common info','useremail')
-        return username
-
-    @staticmethod
-    def getPassword():
-        password=config.get('common info','password')
-        return password
 

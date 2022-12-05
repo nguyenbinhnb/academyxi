@@ -17,8 +17,6 @@ from wrapper.elementfinder import ElementByLocator
 @pytest.hookimpl(hookwrapper=True)
 class Test_001_validate_online_enrolment_flow():
     baseURL = ReadConfig.getApplicationURL("baseURL")
-    username = ReadConfig.getUseremail()
-    password = ReadConfig.getPassword()
     logger = LogGen.loggen()
 
     @pytest.mark.sanity

@@ -21,10 +21,16 @@ class Test_001_Frequent_Failures:
     logger = LogGen.loggen()
     baseURL = ReadConfig.getApplicationURL("baseURL")
     onlineCoursesPageURL= ReadConfig.getApplicationURL("Online Courses Page")
+    allCoursesListingURL = ReadConfig.getApplicationURL("All Courses Listing Page")
+    customerExperienceDisciplineURL = ReadConfig.getApplicationURL("Customer Experience Discipline Page")
+    buyNowURL = ReadConfig.getApplicationURL("Buy Now Page")
+    lpSoftwareEngineerOnlineURL = ReadConfig.getApplicationURL("LP Software Engineer Online Page")
+    lpUXUIOnlineURL = ReadConfig.getApplicationURL("LP UX UI Online Page")
+    cxSelfPacedElevateURL = ReadConfig.getApplicationURL("CX Self Paced Elevate Page")
 
     # @pytest.mark.sanity
-    # @pytest.mark.regression
     @pytest.mark.smoke
+    # @pytest.mark.regression
     def test_001_frequent_failures_on_home_page(self):
         self.logger.info("Test_001_frequent_failures_on_home_page")
         self.logger.info("Started Go To Home page")
@@ -49,7 +55,7 @@ class Test_001_Frequent_Failures:
     def test_003_frequent_failures_on_online_courses_page(self):
         self.logger.info("Test_003_frequent_failures_on_online_courses_page")
         self.logger.info("Started Go To Online Courses page")
-        self.driver.get(self.onlineCoursesPageURL)
+        self.driver.get(self.allCoursesListingURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         self.basePage.verify_broken_images()
@@ -58,13 +64,13 @@ class Test_001_Frequent_Failures:
     # @pytest.mark.regression
     def test_004_frequent_failures_on_courses_page(self):
         self.logger.info("Test_003_frequent_failures_on_online_courses_page")
-        self.logger.info("Verify broken images on Online Courses page")
+        self.logger.info("Verify broken images on Customer Experience: Discipline page")
         self.basePage = BasePage(self.driver)
-        self.driver.get(self.baseURL+"online-courses/customer-experience/")
+        self.driver.get(self.customerExperienceDisciplineURL)
         self.basePage.wait_for_page_load()
         self.basePage.verify_broken_images()
         self.logger.info("Verify broken images on Customer Experience: Elevate (Self-paced) page")
-        self.driver.get(self.baseURL+"online-courses/customer-experience/elevate-self-paced/")
+        self.driver.get(self.cxSelfPacedElevateURL)
         self.basePage.wait_for_page_load()
         self.basePage.verify_broken_images()
 
@@ -72,7 +78,7 @@ class Test_001_Frequent_Failures:
     # @pytest.mark.regression
     def test_005_frequent_failures_on_buy_now_page(self):
         self.basePage = BasePage(self.driver)
-        self.driver.get(self.baseURL+"buy-now/")
+        self.driver.get(self.buyNowURL)
         self.basePage.wait_for_page_load()
         self.basePage.verify_broken_images()
 
@@ -82,13 +88,13 @@ class Test_001_Frequent_Failures:
         self.logger.info("Test_006_frequent_failures_on_landing_page")
         self.basePage = BasePage(self.driver)
         self.logger.info("Verify broken images on Software Engineering Online Landing page")
-        self.driver.get(self.baseURL+"lp/software-engineering-online/")
+        self.driver.get(self.lpSoftwareEngineerOnlineURL)
         self.basePage.wait_for_page_load()
         time.sleep(3)
         ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         self.basePage.verify_broken_images()
         self.logger.info("Verify broken images on UX UI Online Landing page")
-        self.driver.get(self.baseURL+"lp/ux-ui-online/")
+        self.driver.get(self.lpUXUIOnlineURL)
         self.basePage.wait_for_page_load()
         self.basePage.verify_broken_images()
 
@@ -98,7 +104,7 @@ class Test_001_Frequent_Failures:
         self.logger.info("Test_006_frequent_failures_on_landing_page")
         self.basePage = BasePage(self.driver)
         self.logger.info("Verify broken images on Elevate Self Paced page")
-        self.driver.get(self.baseURL+"online-courses/customer-experience/elevate-self-paced/")
+        self.driver.get(self.cxSelfPacedElevateURL)
         self.basePage.wait_for_page_load()
         time.sleep(3)
         ActionChains(self.driver).move_by_offset(20, 20).click().perform()

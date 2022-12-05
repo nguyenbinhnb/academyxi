@@ -11,9 +11,11 @@ from utilities.customLogger import LogGen
 @pytest.hookimpl(hookwrapper=True)
 class TestValidateGaAndGtmArePresentOnMainPages:
     baseURL = ReadConfig.getApplicationURL("baseURL")
-    username = ReadConfig.getUseremail()
-    password = ReadConfig.getPassword()
     logger = LogGen.loggen()
+    customerExperienceDisciplineURL = ReadConfig.getApplicationURL("Customer Experience Discipline Page")
+    xdThankYouURL = ReadConfig.getApplicationURL("XD Thank You Page")
+    checkoutURL = ReadConfig.getApplicationURL("Checkout Page")
+    lpSoftwareEngineerOnlineURL = ReadConfig.getApplicationURL("LP Software Engineer Online Page")
 
     @pytest.mark.sanity
     # @pytest.mark.regression
@@ -32,7 +34,7 @@ class TestValidateGaAndGtmArePresentOnMainPages:
     @pytest.mark.smoke
     def test_002_validate_ga_and_gtm_are_present_on_checkout_page(self):
         self.logger.info("Test_001_validate_ga_and_gtm_are_present_on_checkout_page")
-        self.driver.get(self.baseURL+"checkout/")
+        self.driver.get(self.checkoutURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         time.sleep(2)
@@ -44,7 +46,7 @@ class TestValidateGaAndGtmArePresentOnMainPages:
     @pytest.mark.smoke
     def test_003_validate_ga_and_gtm_are_present_on_thank_you_page(self):
         self.logger.info("Test_001_validate_ga_and_gtm_are_present_on_thank_you_page")
-        self.driver.get(self.baseURL+"/online-courses/user-experience-design/course-guide/thank-you/")
+        self.driver.get(self.xdThankYouURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         time.sleep(2)
@@ -56,7 +58,7 @@ class TestValidateGaAndGtmArePresentOnMainPages:
     @pytest.mark.smoke
     def test_004_validate_ga_and_gtm_are_present_on_landing_page(self):
         self.logger.info("Test_001_validate_ga_and_gtm_are_present_on_landing_page")
-        self.driver.get(self.baseURL + "lp/software-engineering-online/")
+        self.driver.get(self.lpSoftwareEngineerOnlineURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         time.sleep(2)
@@ -68,7 +70,7 @@ class TestValidateGaAndGtmArePresentOnMainPages:
     @pytest.mark.smoke
     def test_005_validate_ga_and_gtm_are_present_on_course_page(self):
         self.logger.info("Test_001_validate_ga_and_gtm_are_present_on_course_page")
-        self.driver.get(self.baseURL+"online-courses/customer-experience/")
+        self.driver.get(self.customerExperienceDisciplineURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         time.sleep(2)

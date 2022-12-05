@@ -18,6 +18,9 @@ from wrapper.BasePage import BasePage
 class Test_001_Call_To_Actions:
     logger = LogGen.loggen()
     baseURL = ReadConfig.getApplicationURL("baseURL")
+    allCoursesListingURL = ReadConfig.getApplicationURL("All Courses Listing Page")
+    buyNowURL = ReadConfig.getApplicationURL("Buy Now Page")
+    lpSoftwareEngineerOnlineURL = ReadConfig.getApplicationURL("LP Software Engineer Online Page")
 
     @pytest.mark.smoke
     # @pytest.mark.regression
@@ -39,7 +42,7 @@ class Test_001_Call_To_Actions:
     def test_002_call_to_actions_on_online_courses_page(self):
         self.logger.info("Test_001_call_to_actions_on_online_courses_page")
         self.logger.info("Started Go To Online Course Page")
-        self.driver.get(self.baseURL+"online-courses/")
+        self.driver.get(self.allCoursesListingURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         time.sleep(3)
@@ -56,7 +59,7 @@ class Test_001_Call_To_Actions:
     def test_003_call_to_actions_on_buy_now_page(self):
         self.logger.info("Test_001_call_to_actions_on_buy_now_page")
         self.logger.info("Started Go To Buy Now Page")
-        self.driver.get("https://academyxi.com/buy-now/")
+        self.driver.get(self.buyNowURL)
         self.buyNowPage = BuyNowPage(self.driver)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
@@ -71,7 +74,7 @@ class Test_001_Call_To_Actions:
     def test_004_call_to_actions_on_landing_page(self):
         self.logger.info("Test_001_call_to_actions_on_landing_page")
         self.logger.info("Started Go To Landing Page")
-        self.driver.get(self.baseURL+"lp/software-engineering-online/")
+        self.driver.get(self.lpSoftwareEngineerOnlineURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         time.sleep(5)
