@@ -27,6 +27,7 @@ class Test_001_Frequent_Failures:
     lpSoftwareEngineerOnlineURL = ReadConfig.getApplicationURL("LP Software Engineer Online Page")
     lpUXUIOnlineURL = ReadConfig.getApplicationURL("LP UX UI Online Page")
     cxSelfPacedElevateURL = ReadConfig.getApplicationURL("CX Self Paced Elevate Page")
+    blogsURL = ReadConfig.getApplicationURL("Blogs Page")
 
     # @pytest.mark.sanity
     @pytest.mark.smoke
@@ -44,7 +45,7 @@ class Test_001_Frequent_Failures:
     def test_002_frequent_failures_on_blog_page(self):
         self.logger.info("Test_002_frequent_failures_on_blog_page")
         self.logger.info("Started Go To Blog page")
-        self.driver.get(self.baseURL+"blogs/")
+        self.driver.get(self.blogsURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         self.blogPage = BlogPage(self.driver)

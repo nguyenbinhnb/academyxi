@@ -13,7 +13,7 @@ class TestValidateGaAndGtmArePresentOnMainPages:
     baseURL = ReadConfig.getApplicationURL("baseURL")
     logger = LogGen.loggen()
     customerExperienceDisciplineURL = ReadConfig.getApplicationURL("Customer Experience Discipline Page")
-    xdThankYouURL = ReadConfig.getApplicationURL("XD Thank You Page")
+    uxdThankYouURL = ReadConfig.getApplicationURL("UXD Thank You Page")
     checkoutURL = ReadConfig.getApplicationURL("Checkout Page")
     lpSoftwareEngineerOnlineURL = ReadConfig.getApplicationURL("LP Software Engineer Online Page")
 
@@ -46,7 +46,7 @@ class TestValidateGaAndGtmArePresentOnMainPages:
     @pytest.mark.smoke
     def test_003_validate_ga_and_gtm_are_present_on_thank_you_page(self):
         self.logger.info("Test_001_validate_ga_and_gtm_are_present_on_thank_you_page")
-        self.driver.get(self.xdThankYouURL)
+        self.driver.get(self.uxdThankYouURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         time.sleep(2)

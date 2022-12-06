@@ -22,10 +22,12 @@ class ReadConfig:
             url = config.get('common info', 'lpUXUIOnlineURL')
         elif link == "CX Self Paced Elevate Page":
             url = config.get('common info', 'cxSelfPacedElevateURL')
-        elif link == "XD Thank You Page":
-            url = config.get('common info', 'xdThankYouURL')
+        elif link == "UXD Thank You Page":
+            url = config.get('common info', 'uxdThankYouURL')
         elif link == "Checkout Page":
             url = config.get('common info', 'checkoutURL')
+        elif link == "Blogs Page":
+            url = config.get('common info', 'blogsURL')
         return url
 
 
