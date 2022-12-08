@@ -38,7 +38,7 @@ class Test_001_validate_online_enrolment_flow():
         self.uxuiDesignNewPage = UXUIDesignNewPage(self.driver)
         self.uxuiDesignNewPage.click_enrol_now_button("2")
         self.basePage.wait_for_page_load()
-        ActionChains(self.driver).move_by_offset(10, 10).click().perform()
+        ActionChains(self.driver).move_by_offset(5, 5).click().perform()
         self.checkoutPage = CheckoutPage(self.driver)
         self.checkoutPage.fill_in_details_for_checkout()
         self.checkoutPage.verify_payment_options()

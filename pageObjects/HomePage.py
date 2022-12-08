@@ -20,7 +20,7 @@ class HomePage(BasePage):
     download_course_guide_xpath = "//div[@data-name-courses='Customer Experience']/div[@class='right-content']//a[text()='Download course guide']"
     firstname_xpath = "//input[@placeholder='First Name *']"
     lastname_xpath = "//input[@placeholder='Last Name *']"
-    phone_number_id = "number-phone"
+    phone_number_xpath = "//input[@placeholder='Phone Number *']"
     email_xpath = "//p[contains(@class, 'form_phone')]//following-sibling::p//input[@placeholder='Email *']"
     i_am_over_18_xpath = "//label[text()='I am over 18']//preceding-sibling::input"
     download_button_xpath = "//input[@value='Download course guide']"
@@ -68,20 +68,19 @@ class HomePage(BasePage):
         self.switch_to_iframe(self.download_iframe)
         self.input_text(self.firstname_xpath, firstname)
         self.input_text(self.lastname_xpath, lastname)
-        WebDriverWait(self.driver, 20).until(
-            EC.visibility_of_element_located((By.ID, self.phone_number_id))).send_keys(phone)
+        self.input_text(self.phone_number_xpath, phone)
         self.scroll_into_locator("//p[contains(@class,'Study_Motivation')]")
         self.click_element(self.options_in_dropdown.format('Discipline', discipline))
         self.click_element(self.options_in_dropdown.format('Study_Motivation', reason))
         self.input_text(self.email_xpath, email)
         self.click_element_by_js(self.i_am_over_18_xpath)
-        time.sleep(3)
+        time.sleep(2)
         if self.is_visible(self.captcha_checkbox):
             self.click_element(self.captcha_checkbox)
-            time.sleep(3)
+            time.sleep(2)
         self.click_element_by_js(self.download_button_xpath)
         self.wait_for_loading_icon_disappear()
-        time.sleep(3)
+        time.sleep(2)
         if self.is_visible(self.download_button_xpath):
             self.double_click(self.download_button_xpath)
             self.wait_for_loading_icon_disappear()
