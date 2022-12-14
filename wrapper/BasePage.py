@@ -1,6 +1,8 @@
+import csv
 import json
 import os
 import time
+import unittest
 from telnetlib import EC
 from urllib.request import urlopen
 
@@ -26,7 +28,8 @@ class BasePage:
     div_contains_class_xpath ="//div[contains(@class, 'pagination-content')]"
     script_with_src = "//script[@src='{}']"
     loading_icon_xpath = "//div[@class='loading active']"
-
+    original_price = "//div[@class='elementor-icon-list-text']//span[1]"
+    discounted_price = "//div[@class='elementor-icon-list-text']//span[2]"
 
     def __init__(self, driver):
         self.driver = driver
@@ -139,7 +142,8 @@ class BasePage:
                 self.logger.info("Soft Validation PASSED: Actual: {} and Expected: {}".format(actual_text,
                                                                                               expected_text))
             except AssertionError:
-                self.logger.error("Soft Validation FAILED: Actual: {} and Expected: {}".format(actual_text, expected_text))
+                self.logger.error(
+                    "Soft Validation FAILED: Actual: {} and Expected: {}".format(actual_text, expected_text))
                 self.driver.save_screenshot("./Screenshots/" + f".test_assertTwoValues_{num}.png")
                 self.col_soft_validation_lect_failed_data.append(
                     "Soft Validation FAILED: PAGE: {}, Actual: {} and Expected: {}".format(
@@ -157,7 +161,8 @@ class BasePage:
         self.scroll_into_locator(locator)
         actual_value = self.driver.find_element(By.XPATH, locator).value_of_css_property(property)
         assert actual_value == expected_value
-        self.logger.info("Validation {} Property Passed: Actual: {} and Expected: {}".format(property, actual_value, expected_value))
+        self.logger.info(
+            "Validation {} Property Passed: Actual: {} and Expected: {}".format(property, actual_value, expected_value))
 
     def verify_images_are_not_broken(self, locator):
         try:
@@ -227,6 +232,7 @@ class BasePage:
             print("Encountered InvalidSchema Exception")
         except StaleElementReferenceException:
             pass
+
     def scroll_down_to_bottom(self):
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
@@ -317,10 +323,35 @@ class BasePage:
         time.sleep(2)
         ActionChains(self.driver).move_by_offset(20, 20).move_to_element(drop).perform()
 
+    def verify_prices_by_json_file(self):
+        file = open("TestData/prices.json", "r")
+        data = file.read()
+        file.close()
+        obj = json.loads(data)
+        self.logger.info("Verify prices are present")
+        url = self.get_location()
+        self.logger.info(url)
+        for i in range(len(obj['prices'])):
+            if url == obj['prices'][i]["url"]:
+                actual_original_price = (self.driver.find_element(By.XPATH, self.original_price)).text
+                self.logger.info("The original price = " + "{}".format(actual_original_price))
+                assert actual_original_price == obj['prices'][i]["original_price"]
+                actual_discounted_price = (self.driver.find_element(By.XPATH, self.discounted_price)).text
+                self.logger.info("The discounted price = " + "{}".format(actual_discounted_price))
+                assert actual_discounted_price == obj['prices'][i]["discounted_price"]
 
-
-
-
-
-
+    def verify_prices(self):
+        with open('TestData/prices.csv', newline='') as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+            self.logger.info("Verify prices are present")
+            url = self.get_location()
+            self.logger.info(url)
+            for row in csv_reader:
+                if url == row['url']:
+                    actual_original_price = (self.driver.find_element(By.XPATH, self.original_price)).text
+                    self.logger.info("The original price = " + "{}".format(actual_original_price))
+                    assert actual_original_price == row['original_price']
+                    actual_discounted_price = (self.driver.find_element(By.XPATH, self.discounted_price)).text
+                    self.logger.info("The discounted price = " + "{}".format(actual_discounted_price))
+                    assert actual_discounted_price == row['discounted_price']
 

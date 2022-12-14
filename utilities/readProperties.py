@@ -28,6 +28,10 @@ class ReadConfig:
             url = config.get('common info', 'checkoutURL')
         elif link == "Blogs Page":
             url = config.get('common info', 'blogsURL')
+        elif link == "DA Transform Part Time Page":
+            url = config.get('common info', 'daTransformPartTimeURL')
+        elif link == "DA Transform Full Time Page":
+            url = config.get('common info', 'daTransformFullTimeURL')
         return url
 
 
