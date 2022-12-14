@@ -139,11 +139,9 @@ class BasePage:
         if hard_validation.lower() == 'no':
             try:
                 assert actual_text == expected_text
-                self.logger.info("Soft Validation PASSED: Actual: {} and Expected: {}".format(actual_text,
-                                                                                              expected_text))
+                self.logger.info("Soft Validation PASSED: Actual: {} and Expected: {}".format(actual_text, expected_text))
             except AssertionError:
-                self.logger.error(
-                    "Soft Validation FAILED: Actual: {} and Expected: {}".format(actual_text, expected_text))
+                self.logger.error("Soft Validation FAILED: Actual: {} and Expected: {}".format(actual_text, expected_text))
                 self.driver.save_screenshot("./Screenshots/" + f".test_assertTwoValues_{num}.png")
                 self.col_soft_validation_lect_failed_data.append(
                     "Soft Validation FAILED: PAGE: {}, Actual: {} and Expected: {}".format(
@@ -161,8 +159,7 @@ class BasePage:
         self.scroll_into_locator(locator)
         actual_value = self.driver.find_element(By.XPATH, locator).value_of_css_property(property)
         assert actual_value == expected_value
-        self.logger.info(
-            "Validation {} Property Passed: Actual: {} and Expected: {}".format(property, actual_value, expected_value))
+        self.logger.info("Validation {} Property Passed: Actual: {} and Expected: {}".format(property, actual_value, expected_value))
 
     def verify_images_are_not_broken(self, locator):
         try:
