@@ -345,10 +345,12 @@ class BasePage:
             self.logger.info(url)
             for row in csv_reader:
                 if url == row['url']:
-                    actual_original_price = (self.driver.find_element(By.XPATH, self.original_price)).text
-                    self.logger.info("The original price = " + "{}".format(actual_original_price))
-                    assert actual_original_price == row['original_price']
-                    actual_discounted_price = (self.driver.find_element(By.XPATH, self.discounted_price)).text
-                    self.logger.info("The discounted price = " + "{}".format(actual_discounted_price))
-                    assert actual_discounted_price == row['discounted_price']
-
+                    try:
+                        actual_original_price = (self.driver.find_element(By.XPATH, self.original_price)).text
+                        self.logger.info("The original price = " + "{}".format(actual_original_price))
+                        assert actual_original_price == row['original_price']
+                        actual_discounted_price = (self.driver.find_element(By.XPATH, self.discounted_price)).text
+                        self.logger.info("The discounted price = " + "{}".format(actual_discounted_price))
+                        assert actual_discounted_price == row['discounted_price']
+                    except Exception:
+                        raise AssertionError("The data is not defined in csv file")
