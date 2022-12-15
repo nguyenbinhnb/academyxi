@@ -35,7 +35,7 @@ class HomePage(BasePage):
     p_contains_class = "//p[contains(@class, '{}')]//select"
     options_in_dropdown = "//p[contains(@class, '{}')]//option[text()='{}']"
     captcha_checkbox = "//p[@class='form-field  Show_Course_Price pd-hidden  hidden   ']//following-sibling::div//iframe[@title='reCAPTCHA']"
-    mega_menu_button = "//a[contains(@class, 'mega-menu-link') and @href='{}']"
+    mega_menu_button = "(//a[contains(@class, 'mega-menu-link') and @href='{}'])[2]"
 
 
     def __init__(self, driver):
