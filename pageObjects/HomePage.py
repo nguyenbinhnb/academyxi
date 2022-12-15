@@ -36,6 +36,7 @@ class HomePage(BasePage):
     options_in_dropdown = "//p[contains(@class, '{}')]//option[text()='{}']"
     captcha_checkbox = "//p[@class='form-field  Show_Course_Price pd-hidden  hidden   ']//following-sibling::div//iframe[@title='reCAPTCHA']"
     mega_menu_button = "(//a[contains(@class, 'mega-menu-link') and @href='{}'])[2]"
+    mega_menu_button_uat = "//a[contains(@class, 'mega-menu-link') and @href='{}']"
 
 
     def __init__(self, driver):
@@ -63,27 +64,17 @@ class HomePage(BasePage):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
         self.click_element_by_js(self.enroll_course_xpath.format(name))
 
-    def download_course_guide(self, firstname, lastname, phone, email, discipline, reason):
-        self.scroll_into_locator(self.h2_with_text.format("Download your free course guide"))
+    def download_course_guide(self, firstname, lastname, phone, email, reason):
         self.switch_to_iframe(self.download_iframe)
         self.input_text(self.firstname_xpath, firstname)
         self.input_text(self.lastname_xpath, lastname)
         self.input_text(self.phone_number_xpath, phone)
-        self.scroll_into_locator("//p[contains(@class,'Study_Motivation')]")
-        self.click_element(self.options_in_dropdown.format('Discipline', discipline))
-        self.click_element(self.options_in_dropdown.format('Study_Motivation', reason))
         self.input_text(self.email_xpath, email)
+        self.click_element(self.options_in_dropdown.format('Study_Motivation', reason))
         self.click_element_by_js(self.i_am_over_18_xpath)
-        time.sleep(2)
-        if self.is_visible(self.captcha_checkbox):
-            self.click_element(self.captcha_checkbox)
-            time.sleep(2)
         self.click_element_by_js(self.download_button_xpath)
         self.wait_for_loading_icon_disappear()
         time.sleep(2)
-        if self.is_visible(self.download_button_xpath):
-            self.double_click(self.download_button_xpath)
-            self.wait_for_loading_icon_disappear()
 
 
     def verify_locator_css_value(self, property, expected_value):
@@ -123,6 +114,10 @@ class HomePage(BasePage):
     def click_view_all_courses(self, locator):
         self.wait_for_page_load()
         self.double_click(self.mega_menu_button.format(locator))
+
+    def click_view_all_courses_on_uat(self, locator):
+        self.wait_for_page_load()
+        self.double_click(self.mega_menu_button_uat.format(locator))
 
     def verify_ga_and_gtm_are_present_on_home_page(self):
         self.element_should_be_present()

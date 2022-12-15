@@ -3,6 +3,7 @@ import time
 import pytest
 from selenium.webdriver import ActionChains
 
+from pageObjects.BuyNowPage import BuyNowPage
 from pageObjects.CheckoutPage import CheckoutPage
 from pageObjects.HomePage import HomePage
 from pageObjects.ThankYouPage import ThankYouPage
@@ -37,13 +38,15 @@ class Test_001_Main_Flow:
         self.homePage.click_page_number('2')
         self.basePage.wait_for_page_load()
         ActionChains(self.driver).move_by_offset(10, 10).click().perform()
+        self.buyNowPage = BuyNowPage(self.driver)
+        self.buyNowPage.click_on_download_button_of_any_course()
         self.checkoutPage = CheckoutPage(self.driver)
-        self.homePage.download_course_guide('sandbox', 'sandbox', '082934290', 'testing@gmail.com','Customer Experience', 'Change or start a new career')
+        self.homePage.download_course_guide('sandbox', 'sandbox', '082934290', 'testing@gmail.com', 'Change or start a new career')
         self.thankYouPage = ThankYouPage(self.driver)
         self.basePage.wait_for_page_load()
         self.basePage.wait_for_loading_icon_disappear()
         ActionChains(self.driver).move_by_offset(5, 5).click().perform()
-        self.basePage.verify_user_redirect_to_correct_location('https://academyxi.com/online-courses/customer-experience/course-guide/thank-you/')
+        self.basePage.verify_user_redirect_to_correct_location('https://academyxi.com/online-courses/data-analytics/course-guide/thank-you')
         self.thankYouPage.verify_course_guide_pdf_files()
 
 

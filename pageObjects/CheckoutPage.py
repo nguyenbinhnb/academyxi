@@ -161,6 +161,7 @@ class CheckoutPage(BasePage):
             EC.visibility_of_element_located((By.XPATH, self.expiry))).send_keys("25")
         self.input_text(self.card_code, "123")
         self.click_element_by_js(self.a_with_class.format("btn-confirm"))
+        self.wait_for_loading_icon_disappear()
 
     def verify_that_enrolment_is_confirmed(self):
         self.wait_element_presence("//p[contains(text(),'Application number')]")

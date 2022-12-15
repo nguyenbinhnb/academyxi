@@ -123,8 +123,7 @@ class BasePage:
     def verify_user_redirect_to_correct_location(self, url):
         self.logger.info("Verify user redirect to correct location")
         txt_link = self.get_location()
-        self.assert_two_values_equal(txt_link, url, 'yes')
-
+        assert txt_link == url
     def assert_two_values_equal(self, actual_text, expected_text, hard_validation='no'):
         """
         Assert text value depending on validation condition
