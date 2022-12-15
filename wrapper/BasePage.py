@@ -158,6 +158,9 @@ class BasePage:
         self.wait_for_page_load()
         self.scroll_into_locator(locator)
         actual_value = self.driver.find_element(By.XPATH, locator).value_of_css_property(property)
+        if actual_value != expected_value:
+            self.logger.info("Actual = " + actual_value)
+            self.logger.info("Expected = " + expected_value)
         assert actual_value == expected_value
         self.logger.info("Validation {} Property Passed: Actual: {} and Expected: {}".format(property, actual_value, expected_value))
 
