@@ -19,7 +19,7 @@ from wrapper.elementfinder import ElementByLocator
 from utilities.customLogger import LogGen
 
 
-class BasePage:
+class BasePage(unittest.TestCase):
     collect_failed_soft_validation_data = []
     col_soft_validation_lect_failed_data = []
     logger = LogGen.loggen()
@@ -70,10 +70,10 @@ class BasePage:
         location = self.driver.find_element(By.XPATH, locator).location
         self.driver.execute_script("window.scrollTo({}, {});".format(location['x'], location['y']))
 
-    def is_visible(self, locator, timeout=20):
+    def is_visible(self, locator, timeout=30):
         num = (time.strftime("%Y-%m-%d %H%M%S", time.gmtime()))
         try:
-            self.driver.implicitly_wait(20)
+            self.driver.implicitly_wait(timeout)
             element = WebDriverWait(self.driver, timeout).until(
                 EC.visibility_of_element_located(self.element_by_finder.by_locator(locator))
             )
