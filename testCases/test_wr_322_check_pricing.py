@@ -37,4 +37,3 @@ class TestValidatePricesOnMainPages:
         time.sleep(2)
         ActionChains(self.driver).move_by_offset(5, 5).click().perform()
         self.basePage.verify_prices()
-
