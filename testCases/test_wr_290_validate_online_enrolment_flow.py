@@ -64,8 +64,6 @@ class Test_001_validate_online_enrolment_flow():
             self.onlineCoursesNewPage = OnlineCoursesNewPage(self.driver)
             self.onlineCoursesNewPage.click_learn_more_button("/online-courses/software-engineering/")
             self.basePage.wait_for_page_load()
-            ActionChains(self.driver).move_by_offset(20, 20).click().perform()
-            ActionChains(self.driver).move_by_offset(5, 5).click().perform()
             self.uxuiDesignNewPage = UXUIDesignNewPage(self.driver)
             self.uxuiDesignNewPage.click_enrol_now_button("2")
             self.basePage.wait_for_page_load()

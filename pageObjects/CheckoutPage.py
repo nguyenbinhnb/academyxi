@@ -124,7 +124,7 @@ class CheckoutPage(BasePage):
         self.click_element(self.next_button)
 
     def close_chat_box(self):
-        if self.is_visible(self.chat_box_iframe, 5):
+        if self.is_visible(self.chat_box_iframe, timeout=2):
             self.switch_to_iframe(self.chat_box_iframe)
             self.click_element_by_js(self.minimize_icon)
             self.driver.switch_to.default_content()

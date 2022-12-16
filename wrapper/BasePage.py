@@ -70,10 +70,10 @@ class BasePage:
         location = self.driver.find_element(By.XPATH, locator).location
         self.driver.execute_script("window.scrollTo({}, {});".format(location['x'], location['y']))
 
-    def is_visible(self, locator, timeout=30):
+    def is_visible(self, locator, timeout=10):
         num = (time.strftime("%Y-%m-%d %H%M%S", time.gmtime()))
         try:
-            self.driver.implicitly_wait(30)
+            self.driver.implicitly_wait(10)
             element = WebDriverWait(self.driver, timeout).until(
                 EC.visibility_of_element_located(self.element_by_finder.by_locator(locator))
             )
@@ -123,6 +123,8 @@ class BasePage:
     def verify_user_redirect_to_correct_location(self, url):
         self.logger.info("Verify user redirect to correct location")
         txt_link = self.get_location()
+        self.logger.info("The expected = "+url)
+        self.logger.info("The actual= "+txt_link)
         assert txt_link == url
     def assert_two_values_equal(self, actual_text, expected_text, hard_validation='no'):
         """
