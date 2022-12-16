@@ -100,7 +100,7 @@ class Test_001_Frequent_Failures:
         self.basePage.verify_broken_images()
 
     @pytest.mark.smoke
-    @pytest.mark.regression
+    # @pytest.mark.regression
     def test_007_frequent_failures_on_elevate_self_paced_page(self):
         self.logger.info("Test_006_frequent_failures_on_landing_page")
         self.basePage = BasePage(self.driver)
