@@ -112,11 +112,9 @@ class HomePage(BasePage):
         self.verify_working_link(self.a_with_text.format("Courses for individuals"))
 
     def click_view_all_courses(self, locator):
-        self.wait_for_page_load()
         self.double_click(self.mega_menu_button.format(locator))
 
     def click_view_all_courses_on_uat(self, locator):
-        self.wait_for_page_load()
         self.double_click(self.mega_menu_button_uat.format(locator))
 
     def verify_ga_and_gtm_are_present_on_home_page(self):

@@ -325,23 +325,6 @@ class BasePage(unittest.TestCase):
         time.sleep(2)
         ActionChains(self.driver).move_by_offset(20, 20).move_to_element(drop).perform()
 
-    def verify_prices_by_json_file(self):
-        file = open("TestData/prices.json", "r")
-        data = file.read()
-        file.close()
-        obj = json.loads(data)
-        self.logger.info("Verify prices are present")
-        url = self.get_location()
-        self.logger.info(url)
-        for i in range(len(obj['prices'])):
-            if url == obj['prices'][i]["url"]:
-                actual_original_price = (self.driver.find_element(By.XPATH, self.original_price)).text
-                self.logger.info("The original price = " + "{}".format(actual_original_price))
-                assert actual_original_price == obj['prices'][i]["original_price"]
-                actual_discounted_price = (self.driver.find_element(By.XPATH, self.discounted_price)).text
-                self.logger.info("The discounted price = " + "{}".format(actual_discounted_price))
-                assert actual_discounted_price == obj['prices'][i]["discounted_price"]
-
     def verify_prices(self):
         with open('TestData/prices.csv', newline='') as csv_file:
             csv_reader = csv.DictReader(csv_file)
@@ -349,7 +332,7 @@ class BasePage(unittest.TestCase):
             url = self.get_location()
             self.logger.info(url)
             for row in csv_reader:
-                if url == row['url']:
+                if row['url'] in url:
                     try:
                         actual_original_price = (self.driver.find_element(By.XPATH, self.original_price)).text
                         self.logger.info("The original price = " + "{}".format(actual_original_price))

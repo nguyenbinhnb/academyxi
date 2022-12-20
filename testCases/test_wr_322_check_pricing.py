@@ -23,17 +23,15 @@ class TestValidatePricesOnMainPages:
         self.driver.get(self.daTransformPartTimeURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
-        time.sleep(2)
         ActionChains(self.driver).move_by_offset(5, 5).click().perform()
         self.basePage.verify_prices()
 
-    # @pytest.mark.regression
+    @pytest.mark.regression
     @pytest.mark.smoke
     def test_002_validate_prices_on_da_transform_full_time_page(self):
         self.logger.info("Test_002_validate_prices_on_da_transform_full_time_page")
         self.driver.get(self.daTransformFullTimeURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
-        time.sleep(2)
         ActionChains(self.driver).move_by_offset(5, 5).click().perform()
         self.basePage.verify_prices()

@@ -140,6 +140,7 @@ class CheckoutPage(BasePage):
 
     def verify_payment_summary(self):
         self.element_should_be_present(self.h3_with_text.format("Payment Summary"))
+        self.scroll_into_locator(self.h3_with_text.format("Payment Summary"))
         self.element_should_be_present(self.p_with_text.format('Course total'))
         self.element_should_be_present(self.p_with_text.format('Discount (Pay in full discount)'))
         self.element_should_be_present(self.td_with_text.format('Total AUD (inc. tax)'))
