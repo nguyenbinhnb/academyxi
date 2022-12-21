@@ -30,8 +30,6 @@ class ReadConfig:
             url = config.get('common info', 'blogsURL')
         elif link == "DA Transform Part Time Page":
             url = config.get('common info', 'daTransformPartTimeURL')
-        elif link == "DA Transform Full Time Page":
-            url = config.get('common info', 'daTransformFullTimeURL')
         elif link == "UUD Transform Full Time Page":
             url = config.get('common info', 'uudTransformFullTimeURL')
         elif link == "UUD Transform Part Time Page":
