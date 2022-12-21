@@ -325,20 +325,20 @@ class BasePage(unittest.TestCase):
         time.sleep(2)
         ActionChains(self.driver).move_by_offset(20, 20).move_to_element(drop).perform()
 
-    def verify_prices(self):
+    def verify_original_price_and_discounted_price(self):
         with open('TestData/prices.csv', newline='') as csv_file:
             csv_reader = csv.DictReader(csv_file)
             self.logger.info("Verify prices are present")
             url = self.get_location()
             self.logger.info(url)
             for row in csv_reader:
-                if row['url'] in url:
+                if row['url'].strip() in url:
                     try:
                         actual_original_price = (self.driver.find_element(By.XPATH, self.original_price)).text
                         self.logger.info("The original price = " + "{}".format(actual_original_price))
-                        assert actual_original_price == row['original_price']
+                        assert actual_original_price == row['original_price'].strip()
                         actual_discounted_price = (self.driver.find_element(By.XPATH, self.discounted_price)).text
                         self.logger.info("The discounted price = " + "{}".format(actual_discounted_price))
-                        assert actual_discounted_price == row['discounted_price']
+                        assert actual_discounted_price == row['discounted_price'].strip()
                     except Exception:
                         raise AssertionError("The data is not defined in csv file")
