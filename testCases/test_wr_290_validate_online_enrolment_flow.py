@@ -10,7 +10,7 @@ from pageObjects.HomePage import HomePage
 from pageObjects.CheckoutPage import CheckoutPage
 from utilities.readProperties import ReadConfig
 from utilities.customLogger import LogGen
-from wrapper.elementfinder import ElementByLocator
+
 
 
 @pytest.mark.usefixtures("setup")
