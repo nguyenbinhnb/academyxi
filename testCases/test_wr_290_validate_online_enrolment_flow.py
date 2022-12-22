@@ -19,7 +19,6 @@ class Test_001_validate_online_enrolment_flow():
     baseURL = ReadConfig.getApplicationURL("baseURL")
     logger = LogGen.loggen()
 
-    @pytest.mark.sanity
     # @pytest.mark.regression
     @pytest.mark.smoke
     def test_001_validate_online_enrolment_flow_on_uat(self):

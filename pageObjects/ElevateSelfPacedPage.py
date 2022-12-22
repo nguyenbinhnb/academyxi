@@ -27,7 +27,7 @@ class ElevateSelfPacedPage(BasePage):
         data = file.read()
         file.close()
         obj = json.loads(data)
-        self.scroll_into_locator(self.a_with_text.format(obj['accordion'][0]["module"]))
+        self.scroll_into_view(self.a_with_text.format(obj['accordion'][0]["module"]))
         self.logger.info("Verify accordions are displayed")
         for i in range(len(obj['accordion'])):
             self.click_element_by_js(self.expand_collapse_icon.format(obj['accordion'][i]["module"]))
@@ -43,7 +43,7 @@ class ElevateSelfPacedPage(BasePage):
 
     def verify_accordions_2(self):
         self.logger.info("Verify accordions are present")
-        self.scroll_into_locator(self.panel_icon.format("1"))
+        self.scroll_into_view(self.panel_icon.format("1"))
         time.sleep(2)
         module_list = self.driver.find_elements(By.XPATH, "//a[@class='panel-title']")
         content_value_list =[]
@@ -66,7 +66,7 @@ class ElevateSelfPacedPage(BasePage):
                     self.logger.info("{} is not present".format(content_value))
                 assert content_value != ""
                 content_value_list.append(content_value)
-            self.scroll_into_locator(self.panel_icon.format(module_number))
+            self.scroll_into_view(self.panel_icon.format(module_number))
             for content_value in content_value_list:
                 sub_content_list = self.driver.find_elements(By.XPATH, self.accordion_sub_content.format(content_value))
             for sub_content in sub_content_list:

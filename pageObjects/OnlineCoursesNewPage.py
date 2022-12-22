@@ -12,6 +12,6 @@ class OnlineCoursesNewPage(BasePage):
 
 
     def click_learn_more_button(self, course):
-        self.scroll_into_locator(self.learn_more_button.format(course))
+        self.scroll_into_view(self.learn_more_button.format(course))
         self.click_element_by_js(self.learn_more_button.format(course))
 

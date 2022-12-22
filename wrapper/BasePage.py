@@ -70,6 +70,11 @@ class BasePage(unittest.TestCase):
         location = self.driver.find_element(By.XPATH, locator).location
         self.driver.execute_script("window.scrollTo({}, {});".format(location['x'], location['y']))
 
+    def scroll_into_view(self, locator):
+        self.wait_element_presence(locator)
+        locator_xpath= self.driver.find_element(By.XPATH, locator)
+        self.driver.execute_script("arguments[0].scrollIntoView();", locator_xpath)
+
     def is_visible(self, locator, timeout=30):
         num = (time.strftime("%Y-%m-%d %H%M%S", time.gmtime()))
         try:
@@ -158,7 +163,7 @@ class BasePage(unittest.TestCase):
 
     def verify_css_property(self, locator, property, expected_value):
         self.wait_for_page_load()
-        self.scroll_into_locator(locator)
+        self.scroll_into_view(locator)
         actual_value = self.driver.find_element(By.XPATH, locator).value_of_css_property(property)
         if actual_value != expected_value:
             self.logger.info("Actual = " + actual_value)
@@ -168,7 +173,7 @@ class BasePage(unittest.TestCase):
 
     def verify_images_are_not_broken(self, locator):
         try:
-           self.scroll_into_locator(locator)
+           self.scroll_into_view(locator)
            image_list = self.driver.find_elements(By.XPATH, locator)
            response_code_list = []
            for image in image_list:

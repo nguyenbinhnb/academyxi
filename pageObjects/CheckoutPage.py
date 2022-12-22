@@ -2,7 +2,7 @@ import time
 from telnetlib import EC
 
 from selenium.common import TimeoutException, WebDriverException
-from selenium.webdriver import ActionChains
+from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -104,7 +104,7 @@ class CheckoutPage(BasePage):
             EC.visibility_of_element_located((By.XPATH, self.li_text_xpath.format(year)))).click()
 
     def fill_in_details_for_checkout(self):
-        self.scroll_into_locator(self.title)
+        self.scroll_into_view(self.title)
         self.set_first_name('Sandbox')
         self.set_last_name("Axi Testing")
         self.set_street_address("123 hanoi")
@@ -112,14 +112,11 @@ class CheckoutPage(BasePage):
         self.set_email_address("binh.n@academyxi.com")
         self.set_date("19")
         self.close_chat_box()
-        self.scroll_into_locator("//input[@id= 'billing_phone']")
+        self.scroll_into_view("//input[@id= 'billing_phone']")
         self.set_month("3")
         self.set_year("1988")
         self.click_element(self.term_check_box)
-        drag = self.driver.find_element(By.XPATH, "(//p/span)[26]")
-        drop = self.driver.find_element(By.XPATH, "//span[text()='Email: change@academyxi.com']")
-        ActionChains(self.driver).drag_and_drop(drag, drop).perform()
-        time.sleep(2)
+        self.scroll_into_view("//span[text()='Email: change@academyxi.com']")
         self.click_element(self.a_with_class.format('btn_accept'))
         self.click_element(self.next_button)
 
@@ -140,7 +137,7 @@ class CheckoutPage(BasePage):
 
     def verify_payment_summary(self):
         self.element_should_be_present(self.h3_with_text.format("Payment Summary"))
-        self.scroll_into_locator(self.h3_with_text.format("Payment Summary"))
+        self.scroll_into_view(self.h3_with_text.format("Payment Summary"))
         self.element_should_be_present(self.p_with_text.format('Course total'))
         self.element_should_be_present(self.p_with_text.format('Discount (Pay in full discount)'))
         self.element_should_be_present(self.td_with_text.format('Total AUD (inc. tax)'))
