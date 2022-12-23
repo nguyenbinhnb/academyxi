@@ -131,7 +131,8 @@ class CheckoutPage(BasePage):
 
     def choose_payment_option(self, num):
         self.click_element_by_js(self.add_to_cart_button.format(num))
-        self.click_element_by_js(self.a_with_class.format('btn-review'))
+        if self.is_present(self.a_with_class.format('btn-review')):
+            self.click_element_by_js(self.a_with_class.format('btn-review'))
 
     def verify_payment_summary(self):
         self.element_should_be_present(self.h3_with_text.format("Payment Summary"))

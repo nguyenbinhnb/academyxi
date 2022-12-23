@@ -46,7 +46,6 @@ class Test_001_validate_online_enrolment_flow():
         self.checkoutPage.verify_payment_summary()
         self.checkoutPage.fill_in_details_for_payment_and_submit()
         self.basePage.wait_for_page_load()
-        ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         self.checkoutPage.verify_that_enrolment_is_confirmed()
         self.basePage.verify_broken_images()
 
