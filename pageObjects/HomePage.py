@@ -20,7 +20,7 @@ class HomePage(BasePage):
     download_course_guide_xpath = "//div[@data-name-courses='Customer Experience']/div[@class='right-content']//a[text()='Download course guide']"
     firstname_xpath = "//input[@placeholder='First Name *']"
     lastname_xpath = "//input[@placeholder='Last Name *']"
-    phone_number_xpath = "//input[@placeholder='Phone Number *']"
+    phone_number_xpath = "//input[@id='number-phone']"
     email_xpath = "//p[contains(@class, 'form_phone')]//following-sibling::p//input[@placeholder='Email *']"
     i_am_over_18_xpath = "//label[text()='I am over 18']//preceding-sibling::input"
     download_button_xpath = "//input[@value='Download course guide']"
