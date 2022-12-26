@@ -43,13 +43,13 @@ class ReadConfig:
         elif link == "SE Transform Full Time Page":
             url = config.get('common info', 'seTransformFullTimeURL')
         elif link == "SE Transform Part Time Page":
-            url = config.get('common info', 'seTransforPartTimeURL')
+            url = config.get('common info', 'seTransformPartTimeURL')
         elif link == "GD Transform Part Time Page":
             url = config.get('common info', 'gdTransformPartTimeURL')
         elif link == "GD Elevate Self Paced Page":
             url = config.get('common info', 'gdElevateSelfPacedURL')
         elif link == "CS Transform Part Time Page":
-            url = config.get('common info', 'csTransforPartTimeURL')
+            url = config.get('common info', 'csTransformPartTimeURL')
         elif link == "PM Transform Part Time Page":
             url = config.get('common info', 'pmTransformPartTimeURL')
         elif link == "PM Elevate Self Paced Page":

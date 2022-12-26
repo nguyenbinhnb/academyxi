@@ -19,10 +19,10 @@ class TestValidatePricesOnMainPages:
     daDataAnalyticsSelfPacedElevateURL = ReadConfig.getApplicationURL("DA Analytics Self Paced Elevate Page")
     fewdTransformPartTimeURL = ReadConfig.getApplicationURL("FEWD Transform Part Time Page")
     seTransformFullTimeURL = ReadConfig.getApplicationURL("SE Transform Full Time Page")
-    seTransforPartTimeURL = ReadConfig.getApplicationURL("SE Transform Part Time Page")
+    seTransformPartTimeURL = ReadConfig.getApplicationURL("SE Transform Part Time Page")
     gdTransformPartTimeURL = ReadConfig.getApplicationURL("GD Transform Part Time Page")
     gdElevateSelfPacedURL = ReadConfig.getApplicationURL("GD Elevate Self Paced Page")
-    csTransforPartTimeURL = ReadConfig.getApplicationURL("CS Transform Part Time Page")
+    csTransformPartTimeURL = ReadConfig.getApplicationURL("CS Transform Part Time Page")
     pmTransformPartTimeURL = ReadConfig.getApplicationURL("PM Transform Part Time Page")
     pmElevateSelfPacedURL = ReadConfig.getApplicationURL("PM Elevate Self Paced Page")
     sdElevateSelfPacedURL = ReadConfig.getApplicationURL("SD Elevate Self Paced Page")
@@ -100,7 +100,7 @@ class TestValidatePricesOnMainPages:
     @pytest.mark.smoke
     def test_008_validate_prices_on_software_engineering_transform_part_time_page(self):
         self.logger.info("Test_008_validate_prices_on_software_engineering_transform_part_time_page")
-        self.driver.get(self.seTransforPartTimeURL)
+        self.driver.get(self.seTransformPartTimeURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         ActionChains(self.driver).move_by_offset(5, 5).click().perform()
@@ -127,7 +127,7 @@ class TestValidatePricesOnMainPages:
     @pytest.mark.smoke
     def test_011_validate_prices_on_cyber_security_transform_part_time_page(self):
         self.logger.info("Test_011_validate_prices_on_cyber_security_transform_part_time_page")
-        self.driver.get(self.csTransforPartTimeURL)
+        self.driver.get(self.csTransformPartTimeURL)
         self.basePage = BasePage(self.driver)
         self.basePage.wait_for_page_load()
         ActionChains(self.driver).move_by_offset(5, 5).click().perform()

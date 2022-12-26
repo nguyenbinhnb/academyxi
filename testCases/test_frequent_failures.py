@@ -111,4 +111,4 @@ class Test_001_Frequent_Failures:
         ActionChains(self.driver).move_by_offset(20, 20).click().perform()
         self.elevateSelfPacedPage = ElevateSelfPacedPage(self.driver)
         ActionChains(self.driver).move_by_offset(20, 20).release().perform()
-        self.elevateSelfPacedPage.verify_accordions_2()
+        self.elevateSelfPacedPage.verify_accordions()

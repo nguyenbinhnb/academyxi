@@ -116,7 +116,7 @@ class CheckoutPage(BasePage):
         self.click_element(self.term_check_box)
         self.scroll_into_view("//span[text()='Email: change@academyxi.com']")
         self.click_element(self.a_with_class.format('btn_accept'))
-        self.click_element(self.next_button)
+        self.click_element_by_js(self.next_button)
 
     def close_chat_box(self):
         if self.is_visible(self.chat_box_iframe, timeout=2):
@@ -133,6 +133,7 @@ class CheckoutPage(BasePage):
         self.click_element_by_js(self.add_to_cart_button.format(num))
         if self.is_present(self.a_with_class.format('btn-review')):
             self.click_element_by_js(self.a_with_class.format('btn-review'))
+        self.wait_for_loading_icon_disappear()
 
     def verify_payment_summary(self):
         self.element_should_be_present(self.h3_with_text.format("Payment Summary"))
