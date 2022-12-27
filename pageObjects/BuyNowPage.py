@@ -1,3 +1,5 @@
+from selenium.common import StaleElementReferenceException
+from selenium.webdriver.common.by import By
 
 from wrapper.BasePage import BasePage
 from wrapper.elementfinder import ElementByLocator
@@ -17,8 +19,12 @@ class BuyNowPage(BasePage):
         self.element_should_be_present(self.enrol_now_button)
 
     def verify_color_of_ctas_on_buy_now_page(self):
-        self.verify_css_property(self.download_course_guide_button, "background-color", "rgba(255, 255, 255, 1)")
-        self.verify_css_property(self.download_course_guide_button, "color", "rgba(18, 30, 77, 1)")
+        try:
+            self.driver.find_elements(By.XPATH, self.download_course_guide_button)
+            self.verify_css_property(self.download_course_guide_button, "background-color", "rgba(255, 255, 255, 1)")
+            self.verify_css_property(self.download_course_guide_button, "color", "rgba(18, 30, 77, 1)")
+        except StaleElementReferenceException:
+            pass
         self.verify_css_property(self.enrol_now_button, "background-color", "rgba(18, 30, 77, 1)")
         self.verify_css_property(self.enrol_now_button, "color", "rgba(255, 255, 255, 1)")
 
