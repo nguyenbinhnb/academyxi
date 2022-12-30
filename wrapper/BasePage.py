@@ -253,8 +253,9 @@ class BasePage(unittest.TestCase):
         bs = BeautifulSoup(html, 'html.parser')
         response_code_list = []
         imgs = bs.find_all('img')
+        img_set = set(imgs)
         try:
-            for img in imgs:
+            for img in img_set:
                 if img.get('src').endswith(('.jpg', '.png', '.webp', 'svg')):
                     response = requests.get(img.get('src'), stream=True)
                     response_code = response.status_code
