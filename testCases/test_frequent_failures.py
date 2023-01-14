@@ -31,7 +31,7 @@ class Test_001_Frequent_Failures:
 
     # @pytest.mark.sanity
     @pytest.mark.smoke
-    # @pytest.mark.regression
+    @pytest.mark.regression
     def test_001_frequent_failures_on_home_page(self):
         self.logger.info("Test_001_frequent_failures_on_home_page")
         self.logger.info("Started Go To Home page")
