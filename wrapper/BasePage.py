@@ -346,5 +346,5 @@ class BasePage(unittest.TestCase):
                         actual_discounted_price = (self.driver.find_element(By.XPATH, self.discounted_price)).text
                         self.logger.info("The discounted price = " + "{}".format(actual_discounted_price))
                         assert actual_discounted_price == row['discounted_price'].strip()
-                    except Exception:
-                        raise AssertionError("The data is not defined in csv file")
+                    except Exception as e:
+                        raise AssertionError(str(e))
